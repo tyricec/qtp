@@ -7,3 +7,7 @@ html, body, div, h1, h2, h3, h4, span, nav, footer {
 h1, h2, h3, h4 {
   font-weight: 300;
 }
+
+body {
+  background: #fcfcfc;
+}

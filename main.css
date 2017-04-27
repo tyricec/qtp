@@ -4,3 +4,32 @@
   color: #ffffff;
   box-shadow: -2px 2px 8px rgba(0, 0, 0, 0.5)
 }
+
+.qtp-form {
+  padding: 16px;
+}
+
+.qtp-form__label {
+  display: block;
+  font-size: 1.2em;
+  margin: 16px 0;
+}
+
+.qtp-form__label--focused {
+  color: #008F9A;
+}
+
+.qtp-form__input {
+  display: block;
+  outline: none;
+  border: none;
+  border-bottom: 4px solid black;
+  background-color: rgba(250,250,250, 0);
+  font-family: inherit;
+  font-size: 1.2em;
+  width: 100%;
+}
+
+.qtp-form__input:focus {
+  border-color: #008F9A;
+}

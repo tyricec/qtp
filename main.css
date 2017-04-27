@@ -43,3 +43,21 @@
   padding: 8px;
   margin: 40px 0 0 0;
 }
+
+.qtp-footer {
+  position: absolute;
+  bottom: 0;
+  padding: 8px 0;
+  background-color: #008F9A;
+  width: 100%;
+  color: #ffffff;
+  box-shadow: -2px -2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.qtp-footer__info {
+  margin: 0 8px;
+}
+
+.qtp-footer__link {
+  color: #cacaff;
+}

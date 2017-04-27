@@ -33,3 +33,13 @@
 .qtp-form__input:focus {
   border-color: #008F9A;
 }
+
+.qtp-submit-button {
+  background-color: #008F9A;
+  border: none;
+  border-radius: 2px;
+  color: #ffffff;
+  font-size: 1.2em;
+  padding: 8px;
+  margin: 40px 0 0 0;
+}

@@ -26,19 +26,10 @@
   display: block;
   outline: none;
   border: none;
-  border-bottom: 4px solid rgba(0,0,0,0.5);
   background-color: rgba(250,250,250, 0);
   font-family: inherit;
   font-size: 1.2em;
   width: 100%;
-}
-
-.qtp-form__input:hover {
-  border-color: rgba(0,0,0,0.75)
-}
-
-.qtp-form__input:focus {
-  border-color: #008F9A;
 }
 
 .qtp-submit-button {

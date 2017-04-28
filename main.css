@@ -7,6 +7,9 @@
 
 .qtp-form {
   padding: 16px;
+  background-color: #ffffff;
+  margin: 8px 0;
+  box-shadow: -2px 2px 4px rgba(0,0,0,0.5);
 }
 
 .qtp-form__label {
@@ -32,6 +35,10 @@
 
 .qtp-form__input:focus {
   border-color: #008F9A;
+}
+
+.qtp-form__input:hover {
+  border-color: rgba(0,0,0,0.75)
 }
 
 .qtp-submit-button {

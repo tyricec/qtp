@@ -15,7 +15,6 @@
 .qtp-form__label {
   display: block;
   font-size: 1.2em;
-  margin: 16px 0;
 }
 
 .qtp-form__label--focused {
@@ -23,6 +22,7 @@
 }
 
 .qtp-form__input {
+  padding: 16px;
   display: block;
   outline: none;
   border: none;
@@ -30,6 +30,10 @@
   font-family: inherit;
   font-size: 1.2em;
   width: 100%;
+}
+
+.qtp-form__input:hover + .qtp-form__hr {
+  border-color: rgba(0,0,0,0.75);
 }
 
 .qtp-form__input:focus + .qtp-form__hr {
@@ -57,7 +61,7 @@
 }
 
 .qtp-form__hr {
-  margin: 0;
+  margin: 0 0 16px 0;
   border: 1px solid rgba(0, 0, 0, 0.5);
 }
 

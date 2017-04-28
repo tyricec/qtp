@@ -1,0 +1,77 @@
+.qtp-form {
+  padding: 16px;
+  background-color: #ffffff;
+  margin: 8px 0;
+  box-shadow: -2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.qtp-form__label {
+  display: block;
+  font-size: 1.2em;
+}
+
+.qtp-form__label--focused {
+  color: #008F9A;
+}
+
+.qtp-form__input {
+  padding: 16px;
+  display: block;
+  outline: none;
+  border: none;
+  background-color: rgba(250,250,250, 0);
+  font-family: inherit;
+  font-size: 1.2em;
+  width: 100%;
+}
+
+.qtp-form__input:hover + .qtp-form__hr {
+  border-color: rgba(0,0,0,0.75);
+}
+
+.qtp-form__input:focus + .qtp-form__hr {
+  border-color: #008F9A;
+  animation-name: scalein;
+  -moz-animation-name: scalein;
+  -webkit-animation-name: scalein;
+  animation-duration: 225ms;
+  -moz-animation-duration: 225ms;
+  -webkit-animation-duration: 225ms;
+  animation-timing-function: ease-in-out;
+  -webkit-animation-timing-function: ease-in-out;
+  -moz-animation-timing-function: ease-in-out;
+}
+
+@keyframes scalein {
+  from {
+    border-color: rgba(0,0,0,0.5);
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+    border-color: #008F9A;
+  }
+}
+
+.qtp-form__hr {
+  margin: 0 0 16px 0;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.qtp-submit-button {
+  background-color: #008F9A;
+  border: none;
+  border-radius: 2px;
+  color: #ffffff;
+  font-size: 1.2em;
+  padding: 8px;
+  margin: 40px 0 0 0;
+}
+
+.qtp-submit-button:focus {
+  outline: 4px solid #ffb700;
+}
+
+.qtp-submit-button:hover {
+  background-color: #006a7c;
+}

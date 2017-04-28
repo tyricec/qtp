@@ -33,12 +33,12 @@
   width: 100%;
 }
 
-.qtp-form__input:focus {
-  border-color: #008F9A;
-}
-
 .qtp-form__input:hover {
   border-color: rgba(0,0,0,0.75)
+}
+
+.qtp-form__input:focus {
+  border-color: #008F9A;
 }
 
 .qtp-submit-button {
@@ -73,16 +73,16 @@
   color: #cacaff;
 }
 
-.qtp-footer__link:hover {
-  color: #dbdbff;
+.qtp-footer__link:visited {
+  color: #dca9fc;
 }
 
 .qtp-footer__link:active {
   color: #fa9090;
 }
 
-.qtp-footer__link:visited {
-  color: #dca9fc;
+.qtp-footer__link:hover {
+  color: #dbdbff;
 }
 
 .qtp-footer__link:visited:hover {

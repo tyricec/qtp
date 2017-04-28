@@ -61,3 +61,19 @@
 .qtp-footer__link {
   color: #cacaff;
 }
+
+.qtp-footer__link:hover {
+  color: #dbdbff;
+}
+
+.qtp-footer__link:active {
+  color: #fa9090;
+}
+
+.qtp-footer__link:visited {
+  color: #dca9fc;
+}
+
+.qtp-footer__link:visited:hover {
+  color: #dcc3fc;
+}

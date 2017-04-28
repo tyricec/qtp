@@ -44,6 +44,10 @@
   margin: 40px 0 0 0;
 }
 
+.qtp-submit-button:hover {
+  background-color: #00556A;
+}
+
 .qtp-footer {
   position: absolute;
   bottom: 0;

@@ -59,6 +59,8 @@
 }
 
 .qtp-submit-button {
+  position: relative;
+  overflow: hidden;
   background-color: #008F9A;
   border: none;
   border-radius: 2px;
@@ -70,6 +72,42 @@
 
 .qtp-submit-button:focus {
   outline: 4px solid #ffb700;
+}
+
+.qtp-submit-button:after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  height: 5px;
+  width: 5px;
+  border-radius: 50%;
+  transform: scale(1,1);
+  background-color: rgba(255,255,255,0);
+}
+
+.qtp-submit-button:focus:after {
+  content: "";
+  animation: ripple 500ms 0s ease-in-out;
+  -webkit-animation: ripple 500ms 0s ease-in-out;
+  -moz-animation: ripple 500ms 0s ease-in-out;
+}
+
+@keyframes ripple {
+  from {
+    transform: scale(1,1);
+    background-color: rgba(255,255,255,0);
+  }
+
+  68% {
+    transform: scale(30,30);
+    background-color: rgba(255,255,255,0.5);
+  }
+
+  to {
+    transform: scale(75,75);
+    background-color: rgba(255,255,255,0);
+  }
 }
 
 .qtp-submit-button:hover {

@@ -32,6 +32,35 @@
   width: 100%;
 }
 
+.qtp-form__input:focus + .qtp-form__hr {
+  border-color: #008F9A;
+  animation-name: scalein;
+  -moz-animation-name: scalein;
+  -webkit-animation-name: scalein;
+  animation-duration: 225ms;
+  -moz-animation-duration: 225ms;
+  -webkit-animation-duration: 225ms;
+  animation-timing-function: ease-in-out;
+  -webkit-animation-timing-function: ease-in-out;
+  -moz-animation-timing-function: ease-in-out;
+}
+
+@keyframes scalein {
+  from {
+    border-color: rgba(0,0,0,0.5);
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+    border-color: #008F9A;
+  }
+}
+
+.qtp-form__hr {
+  margin: 0;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
 .qtp-submit-button {
   background-color: #008F9A;
   border: none;

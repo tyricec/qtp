@@ -4,7 +4,7 @@
   -webkit-box-sizing: content-box;
 }
 
-html, body, div, h1, h2, h3, h4, span, nav, footer {
+html, body, div, h1, h2, h3, h4, ul, li span, nav, footer {
   font-family: Helvetica, sans-serif;
   margin: 0;
   padding: 0;

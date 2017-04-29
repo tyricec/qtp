@@ -13,13 +13,28 @@
 }
 
 .qtp-autocomplete__list-item {
+  position: relative;
   list-style: none;
   padding: 8px 8px;
+  overflow: hidden;
 }
 
-.qtp-autocomplete__list-item:hover {
+.qtp-autocomplete__list-item:hover,
+.qtp-autocomplete__list-item:focus {
   background-color: #008F9A;
   color: #ffffff;
+}
+
+.qtp-autocomplete__list-item:focus:after {
+  position: absolute;
+  content: "";
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  background-color: rgba(0,0,0,0.0);
+  animation: ripple 300ms 0s ease-in-out;
 }
 
 .qtp-autocomplete__hr {
@@ -28,5 +43,9 @@
 }
 
 .qtp-autocomplete__list-item:hover > .qtp-autocomplete__hr {
+  border-color: #ffffff;
+}
+
+.qtp-autocomplete__list-item:focus > .qtp-autocomplete__hr {
   border-color: #ffffff;
 }

@@ -1,0 +1,17 @@
+{
+  "name": "qtp",
+  "version": "0.0.0",
+  "description": "A Quick Trip Planner",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [
+    "qtp"
+  ],
+  "author": "Tyrice Clark",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^19.0.2"
+  }
+}

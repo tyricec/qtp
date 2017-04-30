@@ -1,7 +1,7 @@
 const path = require('path')
 
 const config = {
-  devtool: 'eval-source-map',
+  devtool: 'cheap-module-eval-source-map',
   entry: path.resolve(__dirname, 'main.js'),
   output: {
     path: path.resolve(__dirname, 'dist'),

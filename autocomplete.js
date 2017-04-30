@@ -12,4 +12,4 @@ const autocomplete = {
   }
 }
 
-module.exports = autocomplete
+export { autocomplete }

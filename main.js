@@ -1,3 +1,3 @@
-import {autocomplete} from './autocomplete'
+import {autocomplete,} from './autocomplete'
 
 autocomplete.attach(document.getElementById('qtp-start-point'))

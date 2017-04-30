@@ -1,4 +1,4 @@
-import {autocomplete} from './autocomplete'
+import {autocomplete,} from './autocomplete'
 
 test('autocomplete creates autocomplete element', () => {
   let input = document.createElement('input')

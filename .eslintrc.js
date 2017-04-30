@@ -14,6 +14,7 @@ module.exports = {
         "jest"
     ],
     "rules": {
+        "comma-dangle": ["error", "always"],
         "indent": [
             "error",
             2

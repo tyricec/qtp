@@ -2,7 +2,7 @@ const path = require('path')
 
 const config = {
   devServer: {
-    publicPath: '/dist/'
+    publicPath: '/dist/',
   },
   devtool: 'cheap-module-eval-source-map',
   entry: path.resolve(__dirname, 'main.js'),
@@ -12,9 +12,9 @@ const config = {
   },
   module: {
     rules: [
-      { test: /\.js$/, use: 'babel-loader' },
+      { test: /\.js$/, use: 'babel-loader', },
     ],
-  }
+  },
 }
 
 module.exports = config

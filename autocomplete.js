@@ -13,7 +13,7 @@ const autocomplete = {
     element.style.left = boundingRect.left + 'px'
 
     document.body.appendChild(element)
-  }
+  },
 }
 
-export { autocomplete }
+export { autocomplete, }

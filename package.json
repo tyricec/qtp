@@ -4,7 +4,8 @@
   "description": "A Quick Trip Planner",
   "main": "index.js",
   "scripts": {
-    "build": "webpack",
+    "build": "npm run lint -- . && webpack",
+    "lint": "eslint",
     "serve": "webpack-dev-server --open",
     "test": "jest"
   },

@@ -1,9 +1,9 @@
 {
-  "src_folders" : ["ui-tests"],
+  "src_folders" : ["ui-tests/tests"],
   "output_folder" : "reports",
   "custom_commands_path" : "",
   "custom_assertions_path" : "",
-  "page_objects_path" : "",
+  "page_objects_path" : "ui-tests/page-objects",
   "globals_path" : "",
 
   "selenium" : {

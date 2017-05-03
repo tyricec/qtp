@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`createElement create li element 1`] = `"<li></li>"`;
+
+exports[`createElement creates div element 1`] = `"<div></div>"`;

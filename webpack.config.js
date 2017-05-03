@@ -5,7 +5,7 @@ const config = {
     publicPath: '/dist/',
   },
   devtool: 'cheap-module-eval-source-map',
-  entry: path.resolve(__dirname, 'main.js'),
+  entry: path.resolve(`${__dirname}/src`, 'main.js'),
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'main.js',

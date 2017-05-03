@@ -13,6 +13,13 @@
   "keywords": [
     "qtp"
   ],
+  "jest": {
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "<rootDir>/ui-tests/",
+      "<rootDir>/dist/"
+    ]
+  },
   "author": "Tyrice Clark",
   "license": "ISC",
   "devDependencies": {

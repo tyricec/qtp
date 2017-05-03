@@ -11,8 +11,6 @@ const autocomplete = {
 
     element.style.top = boundingRect.bottom + 'px'
     element.style.left = boundingRect.left + 'px'
-
-    document.body.appendChild(element)
   },
 }
 

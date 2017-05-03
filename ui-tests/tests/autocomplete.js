@@ -1,5 +1,5 @@
 module.exports = {
-  'Autocomplete is Present': function (browser) {
+  'Autocomplete pops up': function (browser) {
     var autocomplete = browser.page.autocomplete()
 
     browser

@@ -9,6 +9,9 @@ const autocomplete = {
     }
 
     function onInput(evt) {
+      if (timeout) {
+        clearTimeout(timeout)
+      }
       timeout = setTimeout(function() {
         service(evt.target.value)
       }, 1000)

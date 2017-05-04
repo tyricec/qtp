@@ -3,5 +3,8 @@ module.exports = {
     autocomplete: {
       selector: '.qtp-autocomplete',
     },
+    startPoint: {
+      selector: '#qtp-start-point',
+    },
   },
 }

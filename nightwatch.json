@@ -28,13 +28,13 @@
         "path" : ""
       },
       "desiredCapabilities": {
-        "browserName": "firefox",
-        "marionette": true
+        "browserName": "chrome"
       }
     },
     "chrome" : {
       "desiredCapabilities": {
-        "browserName": "chrome"
+        "browserName": "firefox",
+        "marionette": true
       }
     }
   }

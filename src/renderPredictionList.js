@@ -4,7 +4,9 @@ function renderPredictionList(results) {
   const [predictions, status,] = results
 
   if (status === 'OK') {
-    return predictions.map((prediction) => {
+    return util.buildHTML('div', {
+      class: 'qtp-autocomplete',
+    }, predictions.map((prediction) => {
       const listItem = util.buildHTML('li', {
         class: 'qtp-autocomplete__list-item',
       }, util.buildText(prediction.description))
@@ -17,10 +19,7 @@ function renderPredictionList(results) {
     }).reduce((acc, current) => {
       acc.appendChild(current)
       return acc
-    }, util.buildHTML(
-      'div', {
-        class: 'qtp-autocomplete',
-      }, util.buildHTML('ul', { class: 'qtp-autocomplete__list', })))
+    }, util.buildHTML('ul', { class: 'qtp-autocomplete__list', })))
   }
 }
 

@@ -1,3 +1,5 @@
+let timeout
+
 const autocomplete = {
   attach(input, service) {
     input.addEventListener('focus', onFocus)
@@ -7,7 +9,9 @@ const autocomplete = {
     }
 
     function onInput(evt) {
-      service(evt.target.value)
+      timeout = setTimeout(function() {
+        service(evt.target.value)
+      }, 1000)
     }
   },
 }

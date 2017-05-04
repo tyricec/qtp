@@ -7,7 +7,7 @@ class InvalidServiceError extends Error {
 }
 
 const autocomplete = {
-  attach(input, service) {
+  attach(input, service, render) {
     input.addEventListener('focus', onFocus)
 
     function onFocus() {
@@ -21,8 +21,10 @@ const autocomplete = {
       timeout = setTimeout(function() {
         try {
           service(evt.target.value)
+            .then((response) => render(response))
+            .catch((err) => err)
         } catch (e) {
-          if (/TypeError/.test(e)) {
+          if (/TypeError.*not.*function/.test(e)) {
             throw new InvalidServiceError('InvalidServiceError: Service must be a function that accepts a query parameter and returns Array.')
           }
           else {

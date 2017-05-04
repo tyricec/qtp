@@ -107,6 +107,42 @@ test('autocomplete calls render method passed', () => {
   expect(render).toBeCalledWith(autocompleteResponse())
 })
 
+test('autocomplete notifies when data is rendered', (done) => {
+  const service = jest.fn(() => { 
+    return  {
+      then: (cb) => { 
+        cb(autocompleteResponse())
+        return {
+          catch: (errCb) => errCb('Error'),
+        }
+      },
+    }
+  })
+
+  const input = document.createElement('input')
+  const render = jest.fn(() =>  'Autocomplete list' )
+
+  input.setAttribute('type', 'text')
+
+  autocomplete.on('render', (notification) => {
+    expect(notification).toMatchSnapshot()
+    done()
+  })
+
+  autocomplete.attach(input, service, render)
+
+  input.focus()
+
+  input.value = 'Test Add'
+
+  input.dispatchEvent(new UIEvent('input', {
+    target: input,
+  }))
+
+  jest.runTimersToTime(1100)
+
+})
+
 function autocompleteResponse() {
   return [[
     {

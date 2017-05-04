@@ -1,4 +1,5 @@
 let timeout
+let subscribers = {}
 
 class InvalidServiceError extends Error {
   constructor(message) {
@@ -21,7 +22,11 @@ const autocomplete = {
       timeout = setTimeout(function() {
         try {
           service(evt.target.value)
-            .then((response) => render(response))
+            .then((response) => {
+              let result = render(response)
+              notify('render', result)
+              return result
+            })
             .catch((err) => err)
         } catch (e) {
           if (/TypeError.*not.*function/.test(e)) {
@@ -34,6 +39,24 @@ const autocomplete = {
       }, 1000)
     }
   },
+  on(evt, cb) {
+    if (subscribers[evt]) {
+      subscribers[evt].push(cb)
+    } else {
+      subscribers[evt] = [cb,]
+    }
+
+    return function off() {
+      subscribers[evt].splice(subscribers[evt].indexOf(cb))
+    }
+  },
+  subscribers: {},
+}
+
+function notify(evt, data) {
+  if (subscribers[evt]) {
+    subscribers[evt].forEach((subscriber) => subscriber(data))
+  }
 }
 
 export default autocomplete

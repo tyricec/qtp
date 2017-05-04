@@ -233,6 +233,31 @@ Object {
     "removeListener": [Function],
     "trigger": [Function],
   },
+  "places": Object {
+    "Autocomplete": [Function],
+    "AutocompleteService": [Function],
+    "PlacesService": [Function],
+    "PlacesServiceStatus": Object {
+      "INVALID_REQUEST": "INVALID_REQUEST",
+      "NOT_FOUND": "NOT_FOUND",
+      "OK": "OK",
+      "OVER_QUERY_LIMIT": "OVER_QUERY_LIMIT",
+      "REQUEST_DENIED": "REQUEST_DENIED",
+      "UNKNOWN_ERROR": "UNKNOWN_ERROR",
+      "ZERO_RESULTS": "ZERO_RESULTS",
+    },
+    "RankBy": Object {
+      "DISTANCE": 1,
+      "PROMINENCE": 0,
+    },
+    "RatingLevel": Object {
+      "EXCELLENT": 2,
+      "EXTRAORDINARY": 3,
+      "GOOD": 0,
+      "VERY_GOOD": 1,
+    },
+    "SearchBox": [Function],
+  },
   "version": "3.28.14",
 }
 `;

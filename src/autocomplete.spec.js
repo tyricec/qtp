@@ -53,3 +53,23 @@ test('autocomplete only queries once within timeout', () => {
   expect(service.mock.calls.length).toBe(1)
   expect(service.mock.calls[0][0]).toBe('Test Address')
 })
+
+test('autocomplete throws error when service is invalid', () => {
+  expect(() => {
+    const input = document.createElement('input')
+
+    input.setAttribute('type', 'text')
+
+    autocomplete.attach(input, {})
+
+    input.focus()
+
+    input.value = 'Test Add'
+
+    input.dispatchEvent(new UIEvent('input', {
+      target: input,
+    }))
+
+    jest.runTimersToTime(1100)
+  }).toThrow(/InvalidServiceError/)
+})

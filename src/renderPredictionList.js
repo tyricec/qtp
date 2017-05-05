@@ -14,6 +14,7 @@ function renderPredictionList(results) {
     }, predictions.map((prediction) => {
       const listItem = util.buildHTML('li', {
         class: 'qtp-autocomplete__list-item',
+        'data-qtp-value': prediction.description,
       }, util.buildText(prediction.description))
 
       listItem.appendChild(util.buildHTML('hr', {

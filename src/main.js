@@ -22,12 +22,18 @@ loadGoogleMap().then(gmap => {
     renderPredictionList
   )
 
-  autocomplete.on('render', (result) => {
-    if (document.querySelector(`.${result.className}`)) {
-      document.body.removeChild(document.querySelector(`.${result.className}`))
+  autocomplete.on('render', (result, input) => {
+    if (document.querySelector('.qtp-autocomplete')) {
+      document.body.removeChild(document.querySelector('.qtp-autocomplete'))
     }
 
     document.body.appendChild(result)
+
+    result.querySelectorAll('.qtp-autocomplete__list-item').forEach((item) => {
+      item.addEventListener('click', () => {
+        input.value = item.getAttribute('data-qtp-value')
+      })
+    })
   })
 
   autocomplete.on('error', () => {

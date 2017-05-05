@@ -42,13 +42,13 @@ test('autocomplete only queries once within timeout', () => {
 
   input.value = 'Test Address'
 
-  jest.runTimersToTime(400)
+  jest.runTimersToTime(1000)
 
   input.dispatchEvent(new UIEvent('input', {
     target: input,
   }))
 
-  jest.runTimersToTime(1600)
+  jest.runTimersToTime(2600)
 
   expect(service.mock.calls.length).toBe(1)
   expect(service.mock.calls[0][0]).toBe('Test Address')
@@ -70,7 +70,7 @@ test('autocomplete throws error when service is invalid', () => {
       target: input,
     }))
 
-    jest.runTimersToTime(1100)
+    jest.runTimersToTime(2100)
   }).toThrow(/InvalidServiceError/)
 })
 
@@ -101,7 +101,7 @@ test('autocomplete calls render method passed', () => {
     target: input,
   }))
 
-  jest.runTimersToTime(1100)
+  jest.runTimersToTime(2100)
 
   expect(render).toBeCalled()
   expect(render).toBeCalledWith(autocompleteResponse())
@@ -139,7 +139,7 @@ test('autocomplete notifies when data is rendered', (done) => {
     target: input,
   }))
 
-  jest.runTimersToTime(1100)
+  jest.runTimersToTime(2100)
 
 })
 

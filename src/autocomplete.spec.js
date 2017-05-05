@@ -126,8 +126,9 @@ test('autocomplete notifies when data is rendered', (done) => {
 
   input.setAttribute('type', 'text')
 
-  autocomplete.on('render', (notification) => {
-    expect(notification).toMatchSnapshot()
+  autocomplete.on('render', (renderedResult, input) => {
+    expect(renderedResult).toMatchSnapshot()
+    expect(input).toBeDefined()
     done()
   })
 

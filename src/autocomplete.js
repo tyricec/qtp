@@ -24,7 +24,7 @@ const autocomplete = {
           service(evt.target.value)
             .then((response) => {
               let result = render(response)
-              notify('render', result)
+              notify('render', result, input)
               return result
             })
             .catch((err) => notify('error', err))
@@ -55,9 +55,9 @@ const autocomplete = {
   subscribers: {},
 }
 
-function notify(evt, data) {
+function notify(evt, ...data) {
   if (subscribers[evt]) {
-    subscribers[evt].forEach((subscriber) => subscriber(data))
+    subscribers[evt].forEach((subscriber) => subscriber(...data))
   }
 }
 

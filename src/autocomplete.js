@@ -10,11 +10,17 @@ class InvalidServiceError extends Error {
 const autocomplete = {
   attach(input, service, render) {
     input.addEventListener('focus', onFocus)
+    input.addEventListener('blur', onBlur)
 
     input.setAttribute('aria-autocomplete', 'list')
 
     function onFocus() {
       this.addEventListener('input', onInput)
+    }
+
+    function onBlur() {
+      input.removeEventListener('input', onInput)
+      notify('blur', input)
     }
 
     function onInput(evt) {

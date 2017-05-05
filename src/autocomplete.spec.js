@@ -171,6 +171,34 @@ test('autocomplete notifies of errors', (done) => {
   jest.runTimersToTime(2100)
 })
 
+test('autocomplete notifies blur event', (done) => {
+  const service = jest.fn(() => Promise.resolve(autocompleteResponse()))
+  const input = document.createElement('input')
+  const render = jest.fn(() =>  'Autocomplete list' )
+
+  input.setAttribute('type', 'text')
+
+  autocomplete.on('blur', (input) => {
+    expect(input).toBeDefined()
+    expect(input.value).toBe('Test Add')
+    done()
+  })
+
+  autocomplete.attach(input, service, render)
+
+  input.focus()
+
+  input.value = 'Test Add'
+
+  input.dispatchEvent(new UIEvent('input', {
+    target: input,
+  }))
+
+  jest.runTimersToTime(2100)
+
+  input.blur()
+})
+
 test('autocomplete adds aria-autocomplete to input', () => {
   const service = jest.fn()
   const input = document.createElement('input')

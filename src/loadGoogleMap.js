@@ -11,7 +11,7 @@ function loadGoogleMap () {
   return new Promise((resolve, reject) => {
     var gMapSrc = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyA1_2TtftN8qv6qI-NYBQ9N7izoh9ps1YM&callback=qtp.initGMap&libraries=places'
     if (document.querySelector(`script[src="${gMapSrc}"]`)) {
-      reject(new GMapScriptAlreadyLoadedError('Google Maps script tag was already added to the dom'))
+      return reject(new GMapScriptAlreadyLoadedError('Google Maps script tag was already added to the dom'))
     }
     let gScript = util.buildHTML('script', {
       src: gMapSrc,

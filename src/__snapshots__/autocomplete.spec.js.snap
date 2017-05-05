@@ -4,4 +4,6 @@ exports[`autocomplete adds aria-autocomplete to input 1`] = `undefined`;
 
 exports[`autocomplete adds aria-autocomplete to input 2`] = `undefined`;
 
+exports[`autocomplete adds aria-autocomplete to input 3`] = `"Autocomplete list"`;
+
 exports[`autocomplete notifies when data is rendered 1`] = `"Autocomplete list"`;

@@ -26,7 +26,14 @@ loadGoogleMap().then(gmap => {
     if (document.querySelector(`.${result.className}`)) {
       document.body.removeChild(document.querySelector(`.${result.className}`))
     }
+
     document.body.appendChild(result)
+  })
+
+  autocomplete.on('error', () => {
+    if (document.querySelector('.qtp-autocomplete')) {
+      document.body.removeChild(document.querySelector('.qtp-autocomplete'))
+    }
   })
 })
 

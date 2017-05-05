@@ -27,10 +27,12 @@ const autocomplete = {
               notify('render', result)
               return result
             })
-            .catch((err) => err)
+            .catch((err) => notify('error', err))
         } catch (e) {
           if (/TypeError.*not.*function/.test(e)) {
-            throw new InvalidServiceError('InvalidServiceError: Service must be a function that accepts a query parameter and returns Array.')
+            let exception = new InvalidServiceError('InvalidServiceError: Service must be a function that accepts a query parameter and returns Array.')
+            notify('error', exception)
+            throw exception
           }
           else {
             throw e

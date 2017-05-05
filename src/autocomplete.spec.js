@@ -5,10 +5,11 @@ jest.useFakeTimers()
 test('autocomplete queries service after typing', () => {
   const input = document.createElement('input')
   const service = jest.fn(() => new Promise((resolve) => resolve()))
+  const render = jest.fn()
 
   input.setAttribute('type', 'text')
 
-  autocomplete.attach(input, service)
+  autocomplete.attach(input, service, render)
 
   input.focus()
 
@@ -27,10 +28,11 @@ test('autocomplete queries service after typing', () => {
 test('autocomplete only queries once within timeout', () => {
   const input = document.createElement('input')
   const service = jest.fn(() => new Promise((resolve) => resolve()))
+  const render = jest.fn()
 
   input.setAttribute('type', 'text')
 
-  autocomplete.attach(input, service)
+  autocomplete.attach(input, service, render)
 
   input.focus()
 
@@ -141,6 +143,31 @@ test('autocomplete notifies when data is rendered', (done) => {
 
   jest.runTimersToTime(2100)
 
+})
+
+test('autocomplete notifies of errors', (done) => {
+  const service = {}
+  const input = document.createElement('input')
+  const render = jest.fn(() =>  'Autocomplete list' )
+
+  input.setAttribute('type', 'text')
+
+  autocomplete.on('error', (error) => {
+    expect(error.message).toMatch(/InvalidService/)
+    done()
+  })
+
+  autocomplete.attach(input, service, render)
+
+  input.focus()
+
+  input.value = 'Test Add'
+
+  input.dispatchEvent(new UIEvent('input', {
+    target: input,
+  }))
+
+  jest.runTimersToTime(2100)
 })
 
 function autocompleteResponse() {

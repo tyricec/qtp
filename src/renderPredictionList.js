@@ -4,9 +4,7 @@ function renderPredictionList(results) {
   const [predictions, status,] = results
 
   if (status === 'ZERO_RESULTS') {
-    return util.buildHTML('div', {
-      class: 'qtp-autocomplete',
-    }, util.buildText('No results found'))
+    return false
   }
   if (status === 'OK') {
     return util.buildHTML('div', {

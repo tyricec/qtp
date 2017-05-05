@@ -6,10 +6,10 @@ test('renderPredctionList renders qtp-autocomplete__list', () => {
   expect(result.outerHTML).toMatchSnapshot()
 })
 
-test('renderPredictionList returns no matches found when status is zero', () => {
+test('renderPredictionList returns false when status is zero', () => {
   const result = renderPredictionList([[], 'ZERO_RESULTS',])
 
-  expect(result.outerHTML).toMatchSnapshot()
+  expect(result).toBeFalsy()
 })
 
 function autocompleteResponse() {

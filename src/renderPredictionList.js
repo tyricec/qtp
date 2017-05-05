@@ -9,10 +9,12 @@ function renderPredictionList(results) {
   if (status === 'OK') {
     return util.buildHTML('div', {
       class: 'qtp-autocomplete',
-    }, predictions.map((prediction) => {
+    }, predictions.map((prediction, idx) => {
       const listItem = util.buildHTML('li', {
         class: 'qtp-autocomplete__list-item',
         'data-qtp-value': prediction.description,
+        role: 'option',
+        id: `qtp-id-${idx}`,
       }, util.buildText(prediction.description))
 
       listItem.appendChild(util.buildHTML('hr', {
@@ -23,7 +25,10 @@ function renderPredictionList(results) {
     }).reduce((acc, current) => {
       acc.appendChild(current)
       return acc
-    }, util.buildHTML('ul', { class: 'qtp-autocomplete__list', })))
+    }, util.buildHTML('ul', { 
+      class: 'qtp-autocomplete__list',
+      role: 'listbox',
+    })))
   }
 }
 

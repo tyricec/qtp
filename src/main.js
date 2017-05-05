@@ -27,13 +27,15 @@ loadGoogleMap().then(gmap => {
       document.body.removeChild(document.querySelector('.qtp-autocomplete'))
     }
 
-    document.body.appendChild(result)
+    if (result) {
+      document.body.appendChild(result)
 
-    result.querySelectorAll('.qtp-autocomplete__list-item').forEach((item) => {
-      item.addEventListener('click', () => {
-        input.value = item.getAttribute('data-qtp-value')
+      result.querySelectorAll('.qtp-autocomplete__list-item').forEach((item) => {
+        item.addEventListener('click', () => {
+          input.value = item.getAttribute('data-qtp-value')
+        })
       })
-    })
+    }
   })
 
   autocomplete.on('error', () => {

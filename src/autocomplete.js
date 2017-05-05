@@ -38,7 +38,7 @@ const autocomplete = {
             throw e
           }
         }
-      }, 1500)
+      }, 2000)
     }
   },
   on(evt, cb) {

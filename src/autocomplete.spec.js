@@ -44,13 +44,13 @@ test('autocomplete only queries once within timeout', () => {
 
   input.value = 'Test Address'
 
-  jest.runTimersToTime(400)
+  jest.runTimersToTime(200)
 
   input.dispatchEvent(new UIEvent('input', {
     target: input,
   }))
 
-  jest.runTimersToTime(1600)
+  jest.runTimersToTime(700)
 
   expect(service.mock.calls.length).toBe(1)
   expect(service.mock.calls[0][0]).toBe('Test Address')

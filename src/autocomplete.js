@@ -11,6 +11,8 @@ const autocomplete = {
   attach(input, service, render) {
     input.addEventListener('focus', onFocus)
 
+    input.setAttribute('aria-autocomplete', 'list')
+
     function onFocus() {
       this.addEventListener('input', onInput)
     }

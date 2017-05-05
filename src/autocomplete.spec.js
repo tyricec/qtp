@@ -171,6 +171,18 @@ test('autocomplete notifies of errors', (done) => {
   jest.runTimersToTime(2100)
 })
 
+test('autocomplete adds aria-autocomplete to input', () => {
+  const service = jest.fn()
+  const input = document.createElement('input')
+  const render = jest.fn(() =>  'Autocomplete list' )
+
+  input.setAttribute('type', 'text')
+
+  autocomplete.attach(input, service, render)
+
+  expect(input.getAttribute('aria-autocomplete')).toBeTruthy()
+})
+
 function autocompleteResponse() {
   return [[
     {

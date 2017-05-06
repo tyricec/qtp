@@ -50,5 +50,3 @@ loadGoogleMap().then(gmap => {
     removeCurrentElement()
   })
 })
-
-autocomplete.attach(document.getElementById('qtp-start-point'))

@@ -199,7 +199,7 @@ test('autocomplete notifies blur event', (done) => {
   input.blur()
 })
 
-test('autocomplete adds aria-autocomplete to input', () => {
+test('autocomplete adds aria attributes to input', () => {
   const service = jest.fn()
   const input = document.createElement('input')
   const render = jest.fn(() =>  'Autocomplete list' )
@@ -209,6 +209,8 @@ test('autocomplete adds aria-autocomplete to input', () => {
   autocomplete.attach(input, service, render)
 
   expect(input.getAttribute('aria-autocomplete')).toBeTruthy()
+  expect(input.getAttribute('role')).toBeTruthy()
+  expect(input.getAttribute('aria-expanded')).toBe('false')
 })
 
 function autocompleteResponse() {

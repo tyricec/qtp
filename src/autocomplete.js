@@ -13,6 +13,8 @@ const autocomplete = {
     input.addEventListener('blur', onBlur)
 
     input.setAttribute('aria-autocomplete', 'list')
+    input.setAttribute('role', 'combobox')
+    input.setAttribute('aria-expanded', 'false')
 
     function onFocus() {
       this.addEventListener('input', onInput)

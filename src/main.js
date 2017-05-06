@@ -22,13 +22,17 @@ loadGoogleMap().then(gmap => {
     renderPredictionList
   )
 
-  autocomplete.on('render', (result, input) => {
-    if (document.querySelector('.qtp-autocomplete')) {
-      document.body.removeChild(document.querySelector('.qtp-autocomplete'))
+  function removeCurrentElement() {
+    let current = document.querySelector('.qtp-autocomplete')
+    if (current) {
+      current.parentElement.removeChild(current)
     }
+  }
 
+  autocomplete.on('render', (result, input) => {
+    removeCurrentElement()
     if (result) {
-      document.body.appendChild(result)
+      input.insertAdjacentElement('afterend', result)
 
       result.querySelectorAll('.qtp-autocomplete__list-item').forEach((item) => {
         item.addEventListener('mousedown', () => {
@@ -39,15 +43,11 @@ loadGoogleMap().then(gmap => {
   })
 
   autocomplete.on('error', () => {
-    if (document.querySelector('.qtp-autocomplete')) {
-      document.body.removeChild(document.querySelector('.qtp-autocomplete'))
-    }
+    removeCurrentElement()
   })
 
   autocomplete.on('blur', () => {
-    if (document.querySelector('.qtp-autocomplete')) {
-      document.body.removeChild(document.querySelector('.qtp-autocomplete'))
-    }
+    removeCurrentElement()
   })
 })
 

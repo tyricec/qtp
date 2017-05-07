@@ -21,32 +21,4 @@ loadGoogleMap().then(gmap => {
     query,
     renderPredictionList
   )
-
-  function removeCurrentElement() {
-    let current = document.querySelector('.qtp-autocomplete')
-    if (current) {
-      current.parentElement.removeChild(current)
-    }
-  }
-
-  autocomplete.on('render', (result, input) => {
-    removeCurrentElement()
-    if (result) {
-      input.insertAdjacentElement('afterend', result)
-
-      result.querySelectorAll('.qtp-autocomplete__list-item').forEach((item) => {
-        item.addEventListener('mousedown', () => {
-          input.value = item.getAttribute('data-qtp-value')
-        })
-      })
-    }
-  })
-
-  autocomplete.on('error', () => {
-    removeCurrentElement()
-  })
-
-  autocomplete.on('blur', () => {
-    removeCurrentElement()
-  })
 })

@@ -2,10 +2,16 @@ import autocomplete from './autocomplete'
 
 jest.useFakeTimers()
 
+let input
+let renderText
+
+beforeEach(() => {
+  [input, renderText,] = setupTestDOM()
+})
+
 test('autocomplete queries service after typing', () => {
-  const input = document.createElement('input')
-  const service = jest.fn(() => new Promise((resolve) => resolve()))
-  const render = jest.fn()
+  const service = jest.fn(() => Promise.resolve(autocompleteResponse()))
+  const render = jest.fn(() => renderText)
 
   input.setAttribute('type', 'text')
 
@@ -26,9 +32,8 @@ test('autocomplete queries service after typing', () => {
 })
 
 test('autocomplete only queries once within timeout', () => {
-  const input = document.createElement('input')
-  const service = jest.fn(() => new Promise((resolve) => resolve()))
-  const render = jest.fn()
+  const service = jest.fn(() => Promise.resolve(autocompleteResponse()))
+  const render = jest.fn(() => renderText)
 
   input.setAttribute('type', 'text')
 
@@ -58,8 +63,6 @@ test('autocomplete only queries once within timeout', () => {
 
 test('autocomplete throws error when service is invalid', () => {
   expect(() => {
-    const input = document.createElement('input')
-
     input.setAttribute('type', 'text')
 
     autocomplete.attach(input, {})
@@ -76,58 +79,14 @@ test('autocomplete throws error when service is invalid', () => {
   }).toThrow(/InvalidServiceError/)
 })
 
-test('autocomplete calls render method passed', () => {
-  const service = jest.fn(() => { 
-    return  {
-      then: (cb) => { 
-        cb(autocompleteResponse())
-        return {
-          catch: (errCb) => errCb('Error'),
-        }
-      },
-    }
-  })
-
-  const input = document.createElement('input')
-  const render = jest.fn()
-
-  input.setAttribute('type', 'text')
-
-  autocomplete.attach(input, service, render)
-
-  input.focus()
-
-  input.value = 'Test Add'
-
-  input.dispatchEvent(new UIEvent('input', {
-    target: input,
-  }))
-
-  jest.runTimersToTime(1100)
-
-  expect(render).toBeCalled()
-  expect(render).toBeCalledWith(autocompleteResponse())
-})
-
 test('autocomplete notifies when data is rendered', (done) => {
-  const service = jest.fn(() => { 
-    return  {
-      then: (cb) => { 
-        cb(autocompleteResponse())
-        return {
-          catch: (errCb) => errCb('Error'),
-        }
-      },
-    }
-  })
-
-  const input = document.createElement('input')
-  const render = jest.fn(() =>  'Autocomplete list' )
+  const service = jest.fn(() => Promise.resolve(autocompleteResponse()))
+  const render = jest.fn(() => renderText)
 
   input.setAttribute('type', 'text')
 
   autocomplete.on('render', (renderedResult, input) => {
-    expect(renderedResult).toMatchSnapshot()
+    expect(renderedResult.outerHTML).toMatchSnapshot()
     expect(input).toBeDefined()
     done()
   })
@@ -143,13 +102,11 @@ test('autocomplete notifies when data is rendered', (done) => {
   }))
 
   jest.runTimersToTime(1100)
-
 })
 
 test('autocomplete notifies of errors', (done) => {
   const service = {}
-  const input = document.createElement('input')
-  const render = jest.fn(() =>  'Autocomplete list' )
+  const render = jest.fn(() => renderText)
 
   input.setAttribute('type', 'text')
 
@@ -173,10 +130,7 @@ test('autocomplete notifies of errors', (done) => {
 
 test('autocomplete notifies blur event', (done) => {
   const service = jest.fn(() => Promise.resolve(autocompleteResponse()))
-  const input = document.createElement('input')
-  const render = jest.fn(() =>  'Autocomplete list' )
-
-  input.setAttribute('type', 'text')
+  const render = jest.fn(() => renderText)
 
   autocomplete.on('blur', (input) => {
     expect(input).toBeDefined()
@@ -200,9 +154,8 @@ test('autocomplete notifies blur event', (done) => {
 })
 
 test('autocomplete adds aria attributes to input', () => {
-  const service = jest.fn()
-  const input = document.createElement('input')
-  const render = jest.fn(() =>  'Autocomplete list' )
+  const service = jest.fn(Promise.resolve(autocompleteResponse()))
+  const render = jest.fn(() => renderText)
 
   input.setAttribute('type', 'text')
 
@@ -212,6 +165,56 @@ test('autocomplete adds aria attributes to input', () => {
   expect(input.getAttribute('role')).toBeTruthy()
   expect(input.getAttribute('aria-expanded')).toBe('false')
 })
+
+describe('autocomplete key events', () => {
+  test('arrow down selects first item', () => {
+
+    const service = jest.fn(() => Promise.resolve(autocompleteResponse()))
+    const render = jest.fn(() => renderText)
+
+    input.setAttribute('type', 'text')
+
+    autocomplete.attach(input, service, render)
+
+    input.focus()
+
+    input.value = 'Test Change'
+
+    input.dispatchEvent(new UIEvent('input', {
+      target: input,
+    }))
+
+    input.dispatchEvent(new UIEvent('keyup', {
+      target: input,
+      key: 'ArrowDown',
+    }))
+
+    expect(document.querySelector('.qtp-autocomplete__list-item-selected')).toBeDefined()
+    expect(document.querySelector('.qtp-autocomplete__list-item-selected')).toMatchSnapshot()
+  })
+})
+
+function setupTestDOM() {
+  let input = document.createElement('input')
+  input.setAttribute('type', 'text')
+
+  let renderText = autocompleteList()
+
+  document.body.appendChild(input)
+
+  return [input, renderText,]
+}
+
+function autocompleteList() {
+  var container = document.createElement('div')
+  container.setAttribute('class', 'qtp-autocomplete')
+  var list = document.createElement('ul')
+  list.setAttribute('class', 'qtp-autocomplete__list')
+
+  container.appendChild(list)
+
+  return container
+}
 
 function autocompleteResponse() {
   return [[

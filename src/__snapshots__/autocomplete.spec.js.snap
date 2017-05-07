@@ -1,9 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`autocomplete adds aria attributes to input 1`] = `undefined`;
+exports[`autocomplete key events arrow down selects first item 1`] = `null`;
 
-exports[`autocomplete adds aria attributes to input 2`] = `undefined`;
+exports[`autocomplete key events arrow down selects first item 2`] = `"<div class=\\"qtp-autocomplete\\"><ul class=\\"qtp-autocomplete__list\\"></ul></div>"`;
 
-exports[`autocomplete adds aria attributes to input 3`] = `"Autocomplete list"`;
+exports[`autocomplete key events arrow down selects first item 3`] = `"<div class=\\"qtp-autocomplete\\"><ul class=\\"qtp-autocomplete__list\\"></ul></div>"`;
 
-exports[`autocomplete notifies when data is rendered 1`] = `"Autocomplete list"`;
+exports[`autocomplete notifies when data is rendered 1`] = `"<div class=\\"qtp-autocomplete\\"><ul class=\\"qtp-autocomplete__list\\"></ul></div>"`;

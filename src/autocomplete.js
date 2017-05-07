@@ -18,6 +18,7 @@ const autocomplete = {
 
     function onFocus() {
       this.addEventListener('input', onInput)
+      this.addEventListener('keyup', onKeyup)
     }
 
     function onBlur() {
@@ -29,7 +30,7 @@ const autocomplete = {
       if (timeout) {
         clearTimeout(timeout)
       }
-      timeout = setTimeout(function() {
+      timeout = setTimeout(function () {
         try {
           service(evt.target.value)
             .then((response) => {
@@ -50,6 +51,9 @@ const autocomplete = {
         }
       }, 400)
     }
+
+    function onKeyup(evt) {
+    }
   },
   on(evt, cb) {
     if (subscribers[evt]) {
@@ -68,6 +72,34 @@ const autocomplete = {
 function notify(evt, ...data) {
   if (subscribers[evt]) {
     subscribers[evt].forEach((subscriber) => subscriber(...data))
+  }
+}
+
+autocomplete.on('render', (result, input) => {
+  removeCurrentElement()
+  if (result) {
+    input.insertAdjacentHTML('afterend', result.outerHTML)
+
+    result.querySelectorAll('.qtp-autocomplete__list-item').forEach((item) => {
+      item.addEventListener('mousedown', () => {
+        input.value = item.getAttribute('data-qtp-value')
+      })
+    })
+  }
+})
+
+autocomplete.on('error', () => {
+  removeCurrentElement()
+})
+
+autocomplete.on('blur', () => {
+  removeCurrentElement()
+})
+
+function removeCurrentElement() {
+  let current = document.querySelector('.qtp-autocomplete')
+  if (current) {
+    current.parentElement.removeChild(current)
   }
 }
 

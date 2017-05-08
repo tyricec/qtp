@@ -85,9 +85,10 @@ test('autocomplete notifies when data is rendered', (done) => {
 
   input.setAttribute('type', 'text')
 
-  autocomplete.on('render', (renderedResult, input) => {
+  const unsub = autocomplete.on('render', (renderedResult, input) => {
     expect(renderedResult.outerHTML).toMatchSnapshot()
     expect(input).toBeDefined()
+    unsub()
     done()
   })
 
@@ -110,8 +111,9 @@ test('autocomplete notifies of errors', (done) => {
 
   input.setAttribute('type', 'text')
 
-  autocomplete.on('error', (error) => {
+  const unsub = autocomplete.on('error', (error) => {
     expect(error.message).toMatch(/InvalidService/)
+    unsub()
     done()
   })
 
@@ -132,9 +134,10 @@ test('autocomplete notifies blur event', (done) => {
   const service = jest.fn(() => Promise.resolve(autocompleteResponse()))
   const render = jest.fn(() => renderText)
 
-  autocomplete.on('blur', (input) => {
+  const unsub = autocomplete.on('blur', (input) => {
     expect(input).toBeDefined()
     expect(input.value).toBe('Test Add')
+    unsub()
     done()
   })
 
@@ -167,8 +170,7 @@ test('autocomplete adds aria attributes to input', () => {
 })
 
 describe('autocomplete key events', () => {
-  test('arrow down selects first item', () => {
-
+  test('arrow down selects first item', (done) => {
     const service = jest.fn(() => Promise.resolve(autocompleteResponse()))
     const render = jest.fn(() => renderText)
 
@@ -184,13 +186,20 @@ describe('autocomplete key events', () => {
       target: input,
     }))
 
-    input.dispatchEvent(new UIEvent('keyup', {
-      target: input,
-      key: 'ArrowDown',
-    }))
+    const unsub = autocomplete.on('render', () => {
+      input.dispatchEvent(new KeyboardEvent('keyup', {
+        target: input,
+        key: 'ArrowDown',
+      }))
 
-    expect(document.querySelector('.qtp-autocomplete__list-item-selected')).toBeDefined()
-    expect(document.querySelector('.qtp-autocomplete__list-item-selected')).toMatchSnapshot()
+      const listItem = document.querySelector('.qtp-autocomplete__list-item-selected')
+      expect(listItem).toBeTruthy()
+      expect(listItem.outerHTML).toMatchSnapshot()
+
+      unsub()
+
+      done()
+    })
   })
 })
 
@@ -201,6 +210,7 @@ function setupTestDOM() {
   let renderText = autocompleteList()
 
   document.body.appendChild(input)
+  document.body.appendChild(renderText)
 
   return [input, renderText,]
 }
@@ -210,6 +220,14 @@ function autocompleteList() {
   container.setAttribute('class', 'qtp-autocomplete')
   var list = document.createElement('ul')
   list.setAttribute('class', 'qtp-autocomplete__list')
+
+  for (let i = 1;i <= 3; i++) {
+    let item = document.createElement('li')
+    item.setAttribute('class', 'qtp-autocomplete__list-item')
+    item.innerHTML = i
+
+    list.appendChild(item)
+  }
 
   container.appendChild(list)
 

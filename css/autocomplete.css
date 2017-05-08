@@ -21,7 +21,8 @@
 }
 
 .qtp-autocomplete__list-item:hover,
-.qtp-autocomplete__list-item:focus {
+.qtp-autocomplete__list-item:focus,
+.qtp-autocomplete__list-item-selected {
   background-color: #008F9A;
   color: #ffffff;
 }
@@ -43,7 +44,8 @@
   border: 1px solid rgba(0,0,0,0.5);
 }
 
-.qtp-autocomplete__list-item:hover > .qtp-autocomplete__hr {
+.qtp-autocomplete__list-item:hover > .qtp-autocomplete__hr,
+.qtp-autocomplete__hr-selected {
   border-color: #ffffff;
 }
 

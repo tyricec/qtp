@@ -55,6 +55,18 @@ const autocomplete = {
     }
 
     function onKeyup(evt) {
+      switch (evt.key) {
+      case 'ArrowDown': {
+        let firstItem = document.querySelector('.qtp-autocomplete__list-item')
+        let firstHR = document.querySelector('.qtp-autocomplete__hr')
+        firstItem.setAttribute('class', `${firstItem.getAttribute('class')} qtp-autocomplete__list-item-selected`)
+
+        firstHR.setAttribute(
+          'class',
+          `${firstHR.getAttribute('class')} qtp-autocomplete__hr-selected`
+        )
+      }
+      }
     }
   },
   on(evt, cb) {

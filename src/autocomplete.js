@@ -65,12 +65,20 @@ const autocomplete = {
           if (current) {
             deselectItem(current)
             next = current.nextSibling
+
+            if (next === null) {
+              return
+            }
           } else {
             next = document.querySelector('.qtp-autocomplete__list-item')
           }
 
           selectItem(next)
+          break
         }
+      default: {
+        return
+      }
       }
 
       function selectItem(item) {

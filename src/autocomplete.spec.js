@@ -241,6 +241,41 @@ describe('autocomplete key events', () => {
     })
   })
 
+  test('arrow down deselects last element when last is selected', (done) => {
+    const service = jest.fn(() => Promise.resolve(autocompleteResponse()))
+    const render = jest.fn(() => renderText)
+
+    input.setAttribute('type', 'text')
+
+    autocomplete.attach(input, service, render)
+
+    input.focus()
+
+    input.value = 'Test Change'
+
+    input.dispatchEvent(new UIEvent('input', {
+      target: input,
+    }))
+
+    const unsub = autocomplete.on('render', () => {
+      const current = document.querySelector('.qtp-autocomplete__list')
+        .lastChild
+
+      current.setAttribute('class', `${current.getAttribute('class')} qtp-autocomplete__list-item__selected`)
+
+      input.dispatchEvent(new KeyboardEvent('keyup', {
+        target: input,
+        key: 'ArrowDown',
+      }))
+
+      const listItem = document.querySelector('.qtp-autocomplete__list-item__selected')
+      expect(listItem).toBeFalsy()
+
+      unsub()
+
+      done()
+    })
+  })
 })
 
 function setupTestDOM() {

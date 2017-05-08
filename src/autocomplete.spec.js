@@ -192,7 +192,7 @@ describe('autocomplete key events', () => {
         key: 'ArrowDown',
       }))
 
-      const listItem = document.querySelector('.qtp-autocomplete__list-item-selected')
+      const listItem = document.querySelector('.qtp-autocomplete__list-item__selected')
       expect(listItem).toBeTruthy()
       expect(listItem.outerHTML).toMatchSnapshot()
 
@@ -201,6 +201,46 @@ describe('autocomplete key events', () => {
       done()
     })
   })
+
+  test('arrow down selects next item in list', (done) => {
+    const service = jest.fn(() => Promise.resolve(autocompleteResponse()))
+    const render = jest.fn(() => renderText)
+
+    input.setAttribute('type', 'text')
+
+    autocomplete.attach(input, service, render)
+
+    input.focus()
+
+    input.value = 'Test Change'
+
+    input.dispatchEvent(new UIEvent('input', {
+      target: input,
+    }))
+
+    const unsub = autocomplete.on('render', () => {
+      input.dispatchEvent(new KeyboardEvent('keyup', {
+        target: input,
+        key: 'ArrowDown',
+      }))
+
+      input.dispatchEvent(new KeyboardEvent('keyup', {
+        target: input,
+        key: 'ArrowDown',
+      }))
+
+      const prevItem = document.querySelectorAll('.qtp-autocomplete__list-item')[0]
+      const listItem = document.querySelector('.qtp-autocomplete__list-item__selected')
+      expect(prevItem.getAttribute('class')).not.toContain(/qtp-autocomplete__list-item__selected/)
+      expect(listItem).toBeTruthy()
+      expect(listItem.outerHTML).toMatchSnapshot()
+
+      unsub()
+
+      done()
+    })
+  })
+
 })
 
 function setupTestDOM() {
@@ -223,9 +263,14 @@ function autocompleteList() {
 
   for (let i = 1;i <= 3; i++) {
     let item = document.createElement('li')
+    let hr = document.createElement('hr')
+
     item.setAttribute('class', 'qtp-autocomplete__list-item')
     item.innerHTML = i
 
+    hr.setAttribute('class', 'qtp-autocomplete__hr')
+
+    item.appendChild(hr)
     list.appendChild(item)
   }
 

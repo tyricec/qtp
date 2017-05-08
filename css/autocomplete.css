@@ -22,7 +22,7 @@
 
 .qtp-autocomplete__list-item:hover,
 .qtp-autocomplete__list-item:focus,
-.qtp-autocomplete__list-item-selected {
+.qtp-autocomplete__list-item__selected {
   background-color: #008F9A;
   color: #ffffff;
 }
@@ -45,7 +45,7 @@
 }
 
 .qtp-autocomplete__list-item:hover > .qtp-autocomplete__hr,
-.qtp-autocomplete__hr-selected {
+.qtp-autocomplete__hr__selected {
   border-color: #ffffff;
 }
 

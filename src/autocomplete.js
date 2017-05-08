@@ -56,16 +56,40 @@ const autocomplete = {
 
     function onKeyup(evt) {
       switch (evt.key) {
-      case 'ArrowDown': {
-        let firstItem = document.querySelector('.qtp-autocomplete__list-item')
-        let firstHR = document.querySelector('.qtp-autocomplete__hr')
-        firstItem.setAttribute('class', `${firstItem.getAttribute('class')} qtp-autocomplete__list-item-selected`)
+        case 'ArrowDown': {
+          let current = document.querySelector(
+            '.qtp-autocomplete__list-item__selected'
+          )
+          let next
 
-        firstHR.setAttribute(
+          if (current) {
+            deselectItem(current)
+            next = current.nextSibling
+          } else {
+            next = document.querySelector('.qtp-autocomplete__list-item')
+          }
+
+          selectItem(next)
+        }
+      }
+
+      function selectItem(item) {
+        let hrLine = item.querySelector('.qtp-autocomplete__hr')
+
+        item.setAttribute('class', `${item.getAttribute('class')} qtp-autocomplete__list-item__selected`)
+
+        hrLine.setAttribute(
           'class',
-          `${firstHR.getAttribute('class')} qtp-autocomplete__hr-selected`
+          `${hrLine.getAttribute('class')} qtp-autocomplete__hr__selected`
         )
       }
+
+      function deselectItem(item) {
+        let hrLine = item.querySelector(
+          '.qtp-autocomplete__hr'
+        )
+        item.setAttribute('class', 'qtp-autocomplete__list-item')
+        hrLine.setAttribute('class', 'qtp-autocomplete__hr')
       }
     }
   },
@@ -102,7 +126,7 @@ function addDefaultSubscribers() {
       })
     }
   })
-  
+
   autocomplete.on('error', () => {
     removeCurrentElement()
   })

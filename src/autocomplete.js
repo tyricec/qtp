@@ -84,20 +84,17 @@ const autocomplete = {
       function selectItem(item) {
         let hrLine = item.querySelector('.qtp-autocomplete__hr')
 
-        item.setAttribute('class', `${item.getAttribute('class')} qtp-autocomplete__list-item__selected`)
+        item.classList.add('qtp-autocomplete__list-item__selected')
 
-        hrLine.setAttribute(
-          'class',
-          `${hrLine.getAttribute('class')} qtp-autocomplete__hr__selected`
-        )
+        hrLine.classList.add('qtp-autocomplete__hr__selected')
       }
 
       function deselectItem(item) {
         let hrLine = item.querySelector(
           '.qtp-autocomplete__hr'
         )
-        item.setAttribute('class', 'qtp-autocomplete__list-item')
-        hrLine.setAttribute('class', 'qtp-autocomplete__hr')
+        item.classList.remove('qtp-autocomplete__list-item__selected')
+        hrLine.classList.remove('qtp-autocomplete__hr__selected')
       }
     }
   },

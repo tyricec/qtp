@@ -1,7 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`autocomplete key events arrow down select first element when last is selected 1`] = `"<li class=\\"qtp-autocomplete__list-item qtp-autocomplete__list-item__selected\\">1<hr class=\\"qtp-autocomplete__hr qtp-autocomplete__hr__selected\\"></li>"`;
-
 exports[`autocomplete key events arrow down selects first item 1`] = `"<li class=\\"qtp-autocomplete__list-item qtp-autocomplete__list-item__selected\\">1<hr class=\\"qtp-autocomplete__hr qtp-autocomplete__hr__selected\\"></li>"`;
 
 exports[`autocomplete key events arrow down selects next item in list 1`] = `"<li class=\\"qtp-autocomplete__list-item qtp-autocomplete__list-item__selected\\">2<hr class=\\"qtp-autocomplete__hr qtp-autocomplete__hr__selected\\"></li>"`;

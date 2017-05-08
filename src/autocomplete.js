@@ -16,6 +16,8 @@ const autocomplete = {
     input.setAttribute('role', 'combobox')
     input.setAttribute('aria-expanded', 'false')
 
+    addDefaultSubscribers()
+
     function onFocus() {
       this.addEventListener('input', onInput)
       this.addEventListener('keyup', onKeyup)
@@ -75,31 +77,33 @@ function notify(evt, ...data) {
   }
 }
 
-autocomplete.on('render', (result, input) => {
-  removeCurrentElement()
-  if (result) {
-    input.insertAdjacentHTML('afterend', result.outerHTML)
+function addDefaultSubscribers() {
+  autocomplete.on('render', (result, input) => {
+    removeCurrentElement()
+    if (result) {
+      input.insertAdjacentHTML('afterend', result.outerHTML)
 
-    result.querySelectorAll('.qtp-autocomplete__list-item').forEach((item) => {
-      item.addEventListener('mousedown', () => {
-        input.value = item.getAttribute('data-qtp-value')
+      result.querySelectorAll('.qtp-autocomplete__list-item').forEach((item) => {
+        item.addEventListener('mousedown', () => {
+          input.value = item.getAttribute('data-qtp-value')
+        })
       })
-    })
-  }
-})
+    }
+  })
+  
+  autocomplete.on('error', () => {
+    removeCurrentElement()
+  })
 
-autocomplete.on('error', () => {
-  removeCurrentElement()
-})
+  autocomplete.on('blur', () => {
+    removeCurrentElement()
+  })
 
-autocomplete.on('blur', () => {
-  removeCurrentElement()
-})
-
-function removeCurrentElement() {
-  let current = document.querySelector('.qtp-autocomplete')
-  if (current) {
-    current.parentElement.removeChild(current)
+  function removeCurrentElement() {
+    let current = document.querySelector('.qtp-autocomplete')
+    if (current) {
+      current.parentElement.removeChild(current)
+    }
   }
 }
 

@@ -1,5 +1,6 @@
 let timeout
 let subscribers = {}
+let typedValue
 
 class InvalidServiceError extends Error {
   constructor(message) {
@@ -29,12 +30,13 @@ const autocomplete = {
     }
 
     function onInput(evt) {
+      typedValue = evt.target.value
       if (timeout) {
         clearTimeout(timeout)
       }
       timeout = setTimeout(function () {
         try {
-          service(evt.target.value)
+          service(typedValue)
             .then((response) => {
               let result = render(response)
               notify('render', result, input)
@@ -67,6 +69,7 @@ const autocomplete = {
             next = current.nextSibling
 
             if (next === null) {
+              input.value = typedValue
               return
             }
           } else {
@@ -87,6 +90,7 @@ const autocomplete = {
             prev = current.previousSibling
 
             if (prev === null) {
+              input.value = typedValue
               return
             }
           } else {

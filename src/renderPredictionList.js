@@ -9,6 +9,7 @@ function renderPredictionList(results) {
   if (status === 'OK') {
     return util.buildHTML('div', {
       class: 'qtp-autocomplete',
+      id: 'qtp-autocomplete',
     }, predictions.map((prediction, idx) => {
       const listItem = util.buildHTML('li', {
         class: 'qtp-autocomplete__list-item',

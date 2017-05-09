@@ -166,7 +166,6 @@ test('autocomplete adds aria attributes to input', () => {
 
   expect(input.getAttribute('aria-autocomplete')).toBeTruthy()
   expect(input.getAttribute('role')).toBeTruthy()
-  expect(input.getAttribute('aria-expanded')).toBe('false')
 })
 
 describe('autocomplete key events', () => {
@@ -456,6 +455,40 @@ describe('autocomplete key events', () => {
 
     jest.runOnlyPendingTimers()
   })
+
+  test('set aria-activedescendant when value is set', (done) => {
+    const service = jest.fn(() => Promise.resolve(autocompleteResponse()))
+    const render = jest.fn(() => renderText)
+
+    input.setAttribute('type', 'text')
+
+    autocomplete.attach(input, service, render)
+
+    input.focus()
+
+    input.value = 'Test Change'
+
+    input.dispatchEvent(new UIEvent('input', {
+      target: input,
+    }))
+
+    const unsub = autocomplete.on('render', () => {
+      input.dispatchEvent(new KeyboardEvent('keyup', {
+        target: input,
+        key: 'ArrowDown',
+      }))
+
+      var listItem = document.querySelector('.qtp-autocomplete__list-item__selected')
+
+      expect(input.getAttribute('aria-activedescendant')).toBe(listItem.getAttribute('id'))
+
+      unsub()
+
+      done()
+    })   
+
+    jest.runOnlyPendingTimers()
+  })
 })
 
 function setupTestDOM() {
@@ -483,6 +516,7 @@ function autocompleteList() {
     item.setAttribute('class', 'qtp-autocomplete__list-item')
     item.innerHTML = i
     item.setAttribute('data-qtp-value', i)
+    item.setAttribute('id', `qtp-id-${i}`)
 
     hr.setAttribute('class', 'qtp-autocomplete__hr')
 

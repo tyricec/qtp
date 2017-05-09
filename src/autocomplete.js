@@ -42,11 +42,11 @@ const autocomplete = {
               notify('render', result, input)
               return result
             })
-            .catch((err) => notify('error', err))
+            .catch((err) => notify('error', err, input))
         } catch (e) {
           if (/TypeError.*not.*function/.test(e)) {
             let exception = new InvalidServiceError('InvalidServiceError: Service must be a function that accepts a query parameter and returns Array.')
-            notify('error', exception)
+            notify('error', exception, input)
             throw exception
           }
           else {
@@ -70,6 +70,7 @@ const autocomplete = {
 
             if (next === null) {
               input.value = typedValue
+              input.setAttribute('aria-activedescendant', false)
               return
             }
           } else {
@@ -91,6 +92,7 @@ const autocomplete = {
 
             if (prev === null) {
               input.value = typedValue
+              input.setAttribute('aria-activedescendant', false)
               return
             }
           } else {
@@ -113,6 +115,8 @@ const autocomplete = {
         hrLine.classList.add('qtp-autocomplete__hr__selected')
         
         input.value = item.getAttribute('data-qtp-value')
+
+        input.setAttribute('aria-activedescendant', item.id)
       }
 
       function deselectItem(item) {
@@ -146,7 +150,7 @@ function notify(evt, ...data) {
 
 function addDefaultSubscribers() {
   autocomplete.on('render', (result, input) => {
-    removeCurrentElement()
+    removeCurrentElement(input)
     if (result) {
       input.insertAdjacentHTML('afterend', result.outerHTML)
 
@@ -155,22 +159,23 @@ function addDefaultSubscribers() {
           input.value = item.getAttribute('data-qtp-value')
         })
       })
-    }
+    }  
   })
 
-  autocomplete.on('error', () => {
-    removeCurrentElement()
+  autocomplete.on('error', (err, input) => {
+    removeCurrentElement(input)
   })
 
-  autocomplete.on('blur', () => {
-    removeCurrentElement()
+  autocomplete.on('blur', (input) => {
+    removeCurrentElement(input)
   })
 
-  function removeCurrentElement() {
+  function removeCurrentElement(input) {
     let current = document.querySelector('.qtp-autocomplete')
     if (current) {
       current.parentElement.removeChild(current)
     }
+    input.setAttribute('aria-expanded', 'false')
   }
 }
 

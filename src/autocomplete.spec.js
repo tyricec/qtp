@@ -351,6 +351,44 @@ describe('autocomplete key events', () => {
 
     jest.runTimersToTime(2100)
   })
+
+  test('arrow up deselects first item in list when first is selected', (done) => {
+    const service = jest.fn(() => Promise.resolve(autocompleteResponse()))
+    const render = jest.fn(() => renderText)
+
+    input.setAttribute('type', 'text')
+
+    autocomplete.attach(input, service, render)
+
+    input.focus()
+
+    input.value = 'Test Change'
+
+    input.dispatchEvent(new UIEvent('input', {
+      target: input,
+    }))
+
+    const unsub = autocomplete.on('render', () => {
+      const current = document.querySelector('.qtp-autocomplete__list')
+        .firstChild
+
+      current.classList.add('qtp-autocomplete__list-item__selected')
+
+      input.dispatchEvent(new KeyboardEvent('keyup', {
+        target: input,
+        key: 'ArrowUp',
+      }))
+
+      const listItem = document.querySelector('.qtp-autocomplete__list-item__selected')
+      expect(listItem).toBeFalsy()
+
+      unsub()
+
+      done()
+    })   
+
+    jest.runOnlyPendingTimers()
+  })
 })
 
 function setupTestDOM() {

@@ -76,9 +76,29 @@ const autocomplete = {
           selectItem(next)
           break
         }
-      default: {
-        return
-      }
+        case 'ArrowUp': {
+          let current = document.querySelector(
+            '.qtp-autocomplete__list-item__selected'
+          )
+          let prev
+
+          if (current) {
+            deselectItem(current)
+            prev = current.previousSibling
+
+            if (prev === null) {
+              return
+            }
+          } else {
+            prev = document.querySelector('.qtp-autocomplete__list').lastChild
+          }
+
+          selectItem(prev)
+          break
+        }
+        default: {
+          return
+        }
       }
 
       function selectItem(item) {

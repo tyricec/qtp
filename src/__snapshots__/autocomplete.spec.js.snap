@@ -4,4 +4,8 @@ exports[`autocomplete key events arrow down selects first item 1`] = `"<li class
 
 exports[`autocomplete key events arrow down selects next item in list 1`] = `"<li class=\\"qtp-autocomplete__list-item qtp-autocomplete__list-item__selected\\">2<hr class=\\"qtp-autocomplete__hr qtp-autocomplete__hr__selected\\"></li>"`;
 
+exports[`autocomplete key events arrow up selects last item in list 1`] = `"<li class=\\"qtp-autocomplete__list-item qtp-autocomplete__list-item__selected\\">3<hr class=\\"qtp-autocomplete__hr qtp-autocomplete__hr__selected\\"></li>"`;
+
+exports[`autocomplete key events arrow up selects previous item in list 1`] = `"<li class=\\"qtp-autocomplete__list-item qtp-autocomplete__list-item__selected\\">2<hr class=\\"qtp-autocomplete__hr qtp-autocomplete__hr__selected\\"></li>"`;
+
 exports[`autocomplete notifies when data is rendered 1`] = `"<div class=\\"qtp-autocomplete\\"><ul class=\\"qtp-autocomplete__list\\"><li class=\\"qtp-autocomplete__list-item\\">1<hr class=\\"qtp-autocomplete__hr\\"></li><li class=\\"qtp-autocomplete__list-item\\">2<hr class=\\"qtp-autocomplete__hr\\"></li><li class=\\"qtp-autocomplete__list-item\\">3<hr class=\\"qtp-autocomplete__hr\\"></li></ul></div>"`;

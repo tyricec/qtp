@@ -276,6 +276,81 @@ describe('autocomplete key events', () => {
       done()
     })
   })
+
+  test('arrow up selects last item in list', (done) => {
+    const service = jest.fn(() => Promise.resolve(autocompleteResponse()))
+    const render = jest.fn(() => renderText)
+
+    input.setAttribute('type', 'text')
+
+    autocomplete.attach(input, service, render)
+
+    input.focus()
+
+    input.value = 'Test Change'
+
+    input.dispatchEvent(new UIEvent('input', {
+      target: input,
+    }))
+
+    const unsub = autocomplete.on('render', () => {
+      input.dispatchEvent(new KeyboardEvent('keyup', {
+        target: input,
+        key: 'ArrowUp',
+      }))
+
+      const listItem = document.querySelector('.qtp-autocomplete__list-item__selected')
+      expect(listItem).toBeTruthy()
+      expect(listItem.outerHTML).toMatchSnapshot()
+
+      unsub()
+
+      done()
+    })
+
+    jest.runTimersToTime(2100)
+  })
+
+  test('arrow up selects previous item in list', (done) => {
+    const service = jest.fn(() => Promise.resolve(autocompleteResponse()))
+    const render = jest.fn(() => renderText)
+
+    input.setAttribute('type', 'text')
+
+    autocomplete.attach(input, service, render)
+
+    input.focus()
+
+    input.value = 'Test Change'
+
+    input.dispatchEvent(new UIEvent('input', {
+      target: input,
+    }))
+
+    const unsub = autocomplete.on('render', () => {
+      input.dispatchEvent(new KeyboardEvent('keyup', {
+        target: input,
+        key: 'ArrowUp',
+      }))
+
+      input.dispatchEvent(new KeyboardEvent('keyup', {
+        target: input,
+        key: 'ArrowUp',
+      }))
+
+      const lastItem = document.querySelector('.qtp-autocomplete__list').lastChild
+      const listItem = document.querySelector('.qtp-autocomplete__list-item__selected')
+      expect(listItem).toBeTruthy()
+      expect(listItem.outerHTML).not.toEqual(lastItem.outerHTML)
+      expect(listItem.outerHTML).toMatchSnapshot()
+
+      unsub()
+
+      done()
+    })
+
+    jest.runTimersToTime(2100)
+  })
 })
 
 function setupTestDOM() {

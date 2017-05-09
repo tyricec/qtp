@@ -389,6 +389,38 @@ describe('autocomplete key events', () => {
 
     jest.runOnlyPendingTimers()
   })
+
+  test('selecting item sets value of input', (done) => {
+    const service = jest.fn(() => Promise.resolve(autocompleteResponse()))
+    const render = jest.fn(() => renderText)
+
+    input.setAttribute('type', 'text')
+
+    autocomplete.attach(input, service, render)
+
+    input.focus()
+
+    input.value = 'Test Change'
+
+    input.dispatchEvent(new UIEvent('input', {
+      target: input,
+    }))
+
+    const unsub = autocomplete.on('render', () => {
+      input.dispatchEvent(new KeyboardEvent('keyup', {
+        target: input,
+        key: 'ArrowDown',
+      }))
+
+      expect(input.value).toBe('1')
+
+      unsub()
+
+      done()
+    })   
+
+    jest.runOnlyPendingTimers()
+  })
 })
 
 function setupTestDOM() {
@@ -415,6 +447,7 @@ function autocompleteList() {
 
     item.setAttribute('class', 'qtp-autocomplete__list-item')
     item.innerHTML = i
+    item.setAttribute('data-qtp-value', i)
 
     hr.setAttribute('class', 'qtp-autocomplete__hr')
 

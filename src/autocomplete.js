@@ -73,7 +73,7 @@ const autocomplete = {
             next = document.querySelector('.qtp-autocomplete__list-item')
           }
 
-          selectItem(next)
+          selectItem(next, input)
           break
         }
         case 'ArrowUp': {
@@ -93,7 +93,7 @@ const autocomplete = {
             prev = document.querySelector('.qtp-autocomplete__list').lastChild
           }
 
-          selectItem(prev)
+          selectItem(prev, input)
           break
         }
         default: {
@@ -101,12 +101,14 @@ const autocomplete = {
         }
       }
 
-      function selectItem(item) {
+      function selectItem(item, input) {
         let hrLine = item.querySelector('.qtp-autocomplete__hr')
 
         item.classList.add('qtp-autocomplete__list-item__selected')
 
         hrLine.classList.add('qtp-autocomplete__hr__selected')
+        
+        input.value = item.getAttribute('data-qtp-value')
       }
 
       function deselectItem(item) {

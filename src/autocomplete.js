@@ -168,6 +168,11 @@ function addDefaultSubscribers() {
           input.value = item.getAttribute('data-qtp-value')
         })
       })
+
+      const boundingBox = input.getBoundingClientRect()
+
+      result.style.top = boundingBox.bottom + 16 + 'px'
+      result.style.left = boundingBox.left
     }  
   })
 

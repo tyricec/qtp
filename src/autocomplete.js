@@ -102,6 +102,15 @@ const autocomplete = {
           selectItem(prev, input)
           break
         }
+        case 'Escape': {
+          input.value = typedValue
+          notify('close', input)
+          break
+        }
+        case 'Enter': {
+          notify('close', input)
+          break
+        }
         default: {
           return
         }
@@ -167,6 +176,10 @@ function addDefaultSubscribers() {
   })
 
   autocomplete.on('blur', (input) => {
+    removeCurrentElement(input)
+  })
+
+  autocomplete.on('close', (input) => {
     removeCurrentElement(input)
   })
 

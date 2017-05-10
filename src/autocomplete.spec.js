@@ -489,6 +489,47 @@ describe('autocomplete key events', () => {
 
     jest.runOnlyPendingTimers()
   })
+
+  test('escape key notifies to close', (done) => {
+    const service = jest.fn(() => Promise.resolve(autocompleteResponse()))
+    const render = jest.fn(() => renderText)
+
+    input.setAttribute('type', 'text')
+
+    autocomplete.attach(input, service, render)
+
+    input.focus()
+
+    input.value = 'Test Change'
+
+    input.dispatchEvent(new UIEvent('input', {
+      target: input,
+    }))
+
+    const unsub = autocomplete.on('render', () => {
+      input.dispatchEvent(new KeyboardEvent('keyup', {
+        target: input,
+        key: 'ArrowDown',
+      }))
+
+      input.dispatchEvent(new KeyboardEvent('keyup', {
+        target: input,
+        key: 'Escape',
+      }))
+
+      unsub()
+    })
+
+    const unsubClose = autocomplete.on('close', () => {
+      expect(input.value).toBe('Test Change')
+
+      unsubClose()
+
+      done()
+    })
+
+    jest.runOnlyPendingTimers() 
+  })
 })
 
 function setupTestDOM() {

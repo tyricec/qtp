@@ -21,4 +21,10 @@ loadGoogleMap().then(gmap => {
     query,
     renderPredictionList
   )
+
+  autocomplete.attach(
+    document.getElementById('qtp-destination-point'),
+    query,
+    renderPredictionList
+  )
 })

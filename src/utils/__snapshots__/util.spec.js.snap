@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`buildHTML adds attribues 1`] = `"<li class=\\"list-item\\" style=\\"top: 20px;color: white;left: 5px\\"></li>"`;
+
+exports[`buildHTML adds text 1`] = `"<div>Build HTML Test</div>"`;
+
+exports[`buildHTML create li element 1`] = `"<li></li>"`;
+
+exports[`buildHTML creates div element 1`] = `"<div></div>"`;
+
+exports[`buildText creates text node 1`] = `"Build Text Test"`;

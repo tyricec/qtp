@@ -1,7 +1,7 @@
-import autocomplete from './autocomplete'
-import AddressInquirer from './AddressInquirer'
-import loadGoogleMap from './loadGoogleMap'
-import renderPredictionList from './renderPredictionList'
+import autocomplete from './autocomplete/autocomplete'
+import AddressInquirer from './utils/AddressInquirer'
+import loadGoogleMap from './utils/loadGoogleMap'
+import renderPredictionList from './utils/renderPredictionList'
 
 loadGoogleMap().then(gmap => {
   const query = (input) => {

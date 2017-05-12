@@ -26,6 +26,7 @@ const autocomplete = {
 
     function onBlur() {
       input.removeEventListener('input', onInput)
+      input.removeEventListener('keyup', onKeyup)
       notify('blur', input)
     }
 
@@ -163,7 +164,7 @@ function addDefaultSubscribers() {
     if (result) {
       input.insertAdjacentHTML('afterend', result.outerHTML)
 
-      result.querySelectorAll('.qtp-autocomplete__list-item').forEach((item) => {
+      input.parentElement.querySelectorAll('.qtp-autocomplete__list-item').forEach((item) => {
         item.addEventListener('mousedown', () => {
           input.value = item.getAttribute('data-qtp-value')
         })

@@ -534,11 +534,13 @@ describe('autocomplete key events', () => {
 
 function setupTestDOM() {
   let input = document.createElement('input')
+  let hr = document.createElement('hr')
   input.setAttribute('type', 'text')
 
   let renderText = autocompleteList()
 
   document.body.appendChild(input)
+  document.body.appendChild(hr)
   document.body.appendChild(renderText)
 
   return [input, renderText,]

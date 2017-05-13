@@ -20,6 +20,7 @@ const autocomplete = {
     addDefaultSubscribers()
 
     function onFocus() {
+      this.select()
       this.addEventListener('input', onInput)
       this.addEventListener('keyup', onKeyup)
     }
@@ -162,18 +163,13 @@ function addDefaultSubscribers() {
   autocomplete.on('render', (result, input) => {
     removeCurrentElement(input)
     if (result) {
-      input.insertAdjacentHTML('afterend', result.outerHTML)
+      input.nextElementSibling.insertAdjacentHTML('afterend', result.outerHTML)
 
       input.parentElement.querySelectorAll('.qtp-autocomplete__list-item').forEach((item) => {
         item.addEventListener('mousedown', () => {
           input.value = item.getAttribute('data-qtp-value')
         })
       })
-
-      const boundingBox = input.getBoundingClientRect()
-
-      result.style.top = boundingBox.bottom + 16 + 'px'
-      result.style.left = boundingBox.left
     }  
   })
 

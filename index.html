@@ -14,7 +14,7 @@
     <h1>Quick Trip Planner</h1>
   </header>
   <div id="qtp-container">
-    <div class="qtp-options">
+    <div class="qtp-options" style="display: none;">
       <select class="qtp-options__select">
         <option selected>Drive</option>
         <option>Walk</option>
@@ -29,7 +29,7 @@
         </button>
       </div>
     </div>
-    <form id="qtp-form" class="qtp-form" style="display: none;">
+    <form id="qtp-form" class="qtp-form">
       <label for="qtp-start-point" class="qtp-form__label">From:</label>
       <input type="text" id="qtp-start-point" class="qtp-form__input"
              placeholder="Enter starting point" required autocomplete="off">
@@ -40,7 +40,7 @@
       <hr class="qtp-form__hr" role="presentation">
       <button class="qtp-submit-button" type="submit">Get Trip</button>
     </form>
-    <div class="qtp-results">
+    <div class="qtp-results" style="display: none;">
       <ul class="qtp-results__list">
         <li class="qtp-results__list-item">
           <span class="qtp-results__icon icon-turn-left"></span>

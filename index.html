@@ -2,9 +2,11 @@
 <head>
   <title>QTP (Quick Trip Planner)</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/icomoon/style.css" type="text/css">
   <link rel="stylesheet" href="css/reset.css" type="text/css">
   <link rel="stylesheet" href="css/main.css" type="text/css">
   <link rel="stylesheet" href="css/form.css" type="text/css">
+  <link rel="stylesheet" href="css/results.css" type="text/css">
   <link rel="stylesheet" href="css/autocomplete.css" type="text/css">
 </head>
 <body>
@@ -12,7 +14,22 @@
     <h1>Quick Trip Planner</h1>
   </header>
   <div id="qtp-container">
-    <form id="qtp-form" class="qtp-form">
+    <div class="qtp-options">
+      <select class="qtp-options__select">
+        <option selected>Drive</option>
+        <option>Walk</option>
+        <option>Bike</option>
+      </select>
+      <div class="qtp-options__view-options">
+        <button class="qtp-options__button">
+          <span class="qtp-options__icon icon-directions"></span>
+        </button>
+        <button class="qtp-options__button" disabled>
+          <span class="qtp-options__icon icon-map"></span>
+        </button>
+      </div>
+    </div>
+    <form id="qtp-form" class="qtp-form" style="display: none;">
       <label for="qtp-start-point" class="qtp-form__label">From:</label>
       <input type="text" id="qtp-start-point" class="qtp-form__input"
              placeholder="Enter starting point" required autocomplete="off">
@@ -23,6 +40,25 @@
       <hr class="qtp-form__hr" role="presentation">
       <button class="qtp-submit-button" type="submit">Get Trip</button>
     </form>
+    <div class="qtp-results">
+      <ul class="qtp-results__list">
+        <li class="qtp-results__list-item">
+          <span class="qtp-results__icon icon-turn-left"></span>
+          Turn Left
+          <hr class="qtp-results__hr">
+        </li>
+        <li class="qtp-results__list-item">
+          <span class="qtp-results__icon icon-turn-right"></span>
+          Turn Right
+          <hr class="qtp-results__hr">
+        </li>
+        <li class="qtp-results__list-item">
+          <span class="qtp-results__icon icon-Destination"><span class="path1"></span><span class="path2"></span></span>
+          Destination
+          <hr class="qtp-results__hr">
+        </li>
+      </ul>
+    </div>
   </div>
   <footer class="qtp-footer">
     <span class="qtp-footer__info">

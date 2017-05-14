@@ -1,0 +1,30 @@
+.qtp-results {
+  margin: 16px 8px;
+  background: #ffffff;
+  box-shadow: -2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.qtp-results__list {
+  border: 1px solid rgba(0,0,0,0.75);
+}
+
+.qtp-results__list-item {
+  padding: 16px;
+  list-style: none;
+  display: block;
+}
+
+.qtp-results__hr {
+  margin: 16px 0 0 0;
+  border: 1px solid rgba(0,0,0,0.5);
+}
+
+.qtp-results__icon {
+  text-decoration: none;
+  font-size: 32px;
+}
+
+.qtp-results__icon, .qtp-results__icon .path1, .qtp-results__icon .path2 {
+  text-decoration: none;
+  font-size: 32px;
+}

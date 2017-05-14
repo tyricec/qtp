@@ -2,7 +2,47 @@
   padding: 16px;
   background-color: #008F9A;
   color: #ffffff;
-  box-shadow: -2px 2px 8px rgba(0, 0, 0, 0.5)
+  box-shadow: -4px 8px 8px rgba(0, 0, 0, 0.5)
+}
+
+.qtp-options {
+  background-color: #00AFB7;
+  color: white;
+  padding: 16px;
+  box-shadow: -4px 4px 8px rgba(0, 0, 0, 0.5)
+}
+
+.qtp-options__select {
+  background: none;
+  border: none;
+  color: white;
+}
+
+.qtp-options__view-options {
+  float: right;
+}
+
+.qtp-options__icon:before {
+  color: #ffffff;
+  font-size: 32px;
+}
+
+.qtp-options__button {
+  background: none;
+  border: none;
+  border-radius: 2px;
+  padding: 0px;
+  outline: none;
+  outline: none;
+  color: white;
+}
+
+.qtp-options__button:disabled {
+  color: rgba(255,255,255,0.33);
+}
+
+.qtp-options__button:disabled .qtp-options__icon:before {
+  color: rgba(255,255,255,0.33);
 }
 
 .qtp-footer {

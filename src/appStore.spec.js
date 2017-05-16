@@ -21,3 +21,15 @@ test('appStore notifies of store updates', (done) => {
     directions: [{ instruction: 'Turn left', },],
   })
 })
+
+test('appStore adds event for dom events', (done) => {
+  const button = document.createElement('button')
+  appStore.publishFromEvent(button, 'click', 'form-click')
+
+  appStore.on('form-click', (target) => {
+    expect(target.tagName).toEqual(button.tagName)
+    done()
+  })
+
+  button.dispatchEvent(new Event('click'))
+})

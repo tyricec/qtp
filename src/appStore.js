@@ -6,6 +6,7 @@ const store = {
   isLoading: false,
   on: on,
   publish: publish,
+  publishFromEvent: publishFromEvent,
   showError: false,
   showForm: true,
   showListView: false,
@@ -36,6 +37,21 @@ function publish (event, ...data) {
     })
   }
   return store
+}
+
+function publishFromEvent (target, domEvent, event) {
+  const pub = () => {
+    publish(event, target)
+  }
+
+  target.addEventListener(domEvent, pub)
+
+  return function unsub () {
+    target.removeEventListener(domEvent, pub)
+    subscribers[event].splice(
+      subscribers[event].indexOf(pub)
+    )
+  }
 }
 
 function update (data) {

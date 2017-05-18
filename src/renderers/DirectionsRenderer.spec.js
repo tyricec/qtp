@@ -2,11 +2,14 @@ import DirectionsRenderer from './DirectionsRenderer'
 
 test('DirectionsRenderer renders directions where specified', () => {
   const directions = [{
-    instructions: 'Turn Left',
+    maneuver: 'turn-left',
+    instruction: 'Turn Left',
   }, {
-    instructions: 'Turn Right',
+    maneuver: 'merge-right',
+    instruction: 'Merge Right',
   }, {
-    instructions: 'Head straight and destination is to the left',
+    maneuver: 'straight',
+    instruction: 'Head straight and destination is to the left',
   },]
 
   const element = document.createElement('div')

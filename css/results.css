@@ -19,12 +19,7 @@
   border: 1px solid rgba(0,0,0,0.5);
 }
 
-.qtp-results__icon {
-  text-decoration: none;
-  font-size: 32px;
-}
-
-.qtp-results__icon, .qtp-results__icon .path1, .qtp-results__icon .path2 {
+.qtp-results__icon, .qtp-results__icon-path {
   text-decoration: none;
   font-size: 32px;
 }

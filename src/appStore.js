@@ -40,7 +40,8 @@ function publish (event, ...data) {
 }
 
 function publishFromEvent (target, domEvent, event) {
-  const pub = () => {
+  const pub = (evt) => {
+    evt.preventDefault()
     publish(event, target)
   }
 

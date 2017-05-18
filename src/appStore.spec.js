@@ -26,8 +26,8 @@ test('appStore adds event for dom events', (done) => {
   const button = document.createElement('button')
   appStore.publishFromEvent(button, 'click', 'form-click')
 
-  appStore.on('form-click', (target) => {
-    expect(target.tagName).toEqual(button.tagName)
+  appStore.on('form-click', (event) => {
+    expect(event.target.tagName).toEqual(event.target.tagName)
     done()
   })
 

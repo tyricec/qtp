@@ -39,18 +39,17 @@ function publish (event, ...data) {
   return store
 }
 
-function publishFromEvent (target, domEvent, event) {
-  const pub = (evt) => {
-    evt.preventDefault()
-    publish(event, target)
+function publishFromEvent (target, domEvent, eventName) {
+  const pub = (event) => {
+    publish(eventName, event)
   }
 
   target.addEventListener(domEvent, pub)
 
   return function unsub () {
     target.removeEventListener(domEvent, pub)
-    subscribers[event].splice(
-      subscribers[event].indexOf(pub)
+    subscribers[eventName].splice(
+      subscribers[eventName].indexOf(pub)
     )
   }
 }

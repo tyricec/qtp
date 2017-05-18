@@ -5,7 +5,7 @@ const directionsFetcher = {
 function get(service, request) {
   return new Promise((resolve, reject) => {
     try {
-      service(request, (status, result) => {
+      service(request, (result, status) => {
         resolve({
           status,
           result,

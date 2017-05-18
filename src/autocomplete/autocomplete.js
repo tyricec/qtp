@@ -168,6 +168,13 @@ function addDefaultSubscribers() {
       input.parentElement.querySelectorAll('.qtp-autocomplete__list-item').forEach((item) => {
         item.addEventListener('mousedown', () => {
           input.value = item.getAttribute('data-qtp-value')
+          
+          // > IE 9 & 10
+          if (input.dispatchEvent) {
+            input.dispatchEvent(new Event('change'))
+          } else {
+            input.fireEvent('onchange', new Event('change'))
+          }
         })
       })
     }  

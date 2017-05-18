@@ -5,6 +5,10 @@
   box-shadow: -2px 2px 4px rgba(0,0,0,0.5);
 }
 
+.qtp-form--hidden {
+  display: none;
+}
+
 .qtp-form__label {
   display: block;
 }

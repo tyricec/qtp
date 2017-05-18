@@ -1,10 +1,12 @@
 const subscribers = {}
 
 const store = {
+  destination: '',
   error: 'There was a problem loading this action. Refresh and try again',
   directions: [],
   isLoading: false,
   on: on,
+  origin: '',
   publish: publish,
   publishFromEvent: publishFromEvent,
   showError: false,

@@ -3,7 +3,7 @@ import directionsResult from './__mocks__/directionsResult'
 
 test('directionsFetcher returns directionsResult', () => {
   const service = jest.fn((request, cb) => {
-    return cb('OK', directionsResult())
+    return cb(directionsResult(), 'OK')
   })
 
   return directionsFetcher.get(service, {

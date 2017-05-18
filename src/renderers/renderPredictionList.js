@@ -1,4 +1,4 @@
-import util from './util'
+import util from '../utils/util'
 
 function renderPredictionList(results) {
   const [predictions, status,] = results

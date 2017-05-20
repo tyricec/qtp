@@ -27,6 +27,7 @@ function update(directions) {
     const maneuver = iconStore.getIconElement(step.maneuver)
     const listItem = document.createElement('li')
     const listItemSeparator = document.createElement('hr')
+    const instructionContainer = document.createElement('div')
     const instruction = document.createElement('template')
 
     if (maneuver) {
@@ -43,8 +44,10 @@ function update(directions) {
 
     listItem.setAttribute('class', 'qtp-results__list-item')
     listItemSeparator.setAttribute('class', 'qtp-results__list-hr')
+
+    instructionContainer.appendChild(instruction.content)
     
-    listItem.appendChild(instruction.content)
+    listItem.appendChild(instructionContainer)
     listItem.appendChild(listItemSeparator)
 
     resultList.appendChild(listItem)

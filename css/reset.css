@@ -2,7 +2,7 @@
   box-sizing: content-box;
   -moz-box-sizing: content-box;
   -webkit-box-sizing: content-box;
-  font-size: 16pt;
+  font-size: 15px;
 }
 
 html, body, div, h1, h2, h3, h4, ul, li span, nav, footer {
@@ -11,7 +11,7 @@ html, body, div, h1, h2, h3, h4, ul, li span, nav, footer {
 }
 
 h1, h2, h3, h4 {
-  font-weight: 300;
+  font-weight: 400;
 }
 
 body {
@@ -36,5 +36,5 @@ h4 {
 }
 
 input, label {
-  font-size: 0.75em;
+  font-size: 1.0em;
 }

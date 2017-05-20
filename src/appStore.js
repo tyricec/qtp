@@ -9,6 +9,7 @@ const store = {
   origin: '',
   publish: publish,
   publishFromEvent: publishFromEvent,
+  showBack: false,
   showError: false,
   showForm: true,
   showListView: false,

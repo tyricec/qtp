@@ -61,6 +61,13 @@ loadGoogleMap().then(gmap => {
       document.querySelector('.qtp-options').classList.add('qtp-options--hidden')
   })
 
+  appStore.on('showBack-update', (showBack) => {
+    if (showBack)
+      document.querySelector('.qtp-back-button').classList.remove('qtp-back-button--hidden')
+    else
+      document.querySelector('.qtp-back-button').classList.add('qtp-back-button--hidden')
+  })
+
   appStore.publishFromEvent(
     document.getElementById('qtp-form'),
     'submit',
@@ -74,10 +81,20 @@ loadGoogleMap().then(gmap => {
   )
 
   appStore.publishFromEvent(
+    document.querySelector('.qtp-back-button'),
+    'click',
+    'qtp-back-button'
+  )
+
+  appStore.publishFromEvent(
     document.getElementById('qtp-destination-point'),
     'change',
     'qtp-destination-point-change'
   )
+
+  appStore.on('qtp-back-button', () => {
+    appStore.update({ showForm: true, showListView: false, showOptions: false, showBack: false, })
+  })
 
   appStore.on('qtp-start-point-change', (evt) => { 
     appStore.update({ origin: evt.target.value, })
@@ -99,7 +116,6 @@ loadGoogleMap().then(gmap => {
       }
     ).then(res => googleDirectionsReducer(res.status, res.result))
     .then(directions => appStore.update({ directions, }))
-    .then(() => appStore.update({ showListView: true, }))
-    .then(() => appStore.update({ showOptions: true, }))
+    .then(() => appStore.update({ showListView: true, showBack: true, showOptions: true, }))
   })
 })

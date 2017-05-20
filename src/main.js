@@ -68,6 +68,20 @@ loadGoogleMap().then(gmap => {
       document.querySelector('.qtp-back-button').classList.add('qtp-back-button--hidden')
   })
 
+  appStore.on('travelMode-update', () => {
+    appStore.update({ showListView: false, })
+
+    directionsFetcher.get(
+      (new gmap.DirectionsService()).route,
+      {
+        destination: appStore.destination,
+        origin: appStore.origin,
+        travelMode: appStore.travelMode,
+      }
+    ).then(res => googleDirectionsReducer(res.status, res.result))
+    .then(directions => appStore.update({ directions, showListView: true, }))
+  })
+
   appStore.publishFromEvent(
     document.getElementById('qtp-form'),
     'submit',
@@ -91,6 +105,16 @@ loadGoogleMap().then(gmap => {
     'change',
     'qtp-destination-point-change'
   )
+
+  appStore.publishFromEvent(
+    document.querySelector('.qtp-options__select'),
+    'change',
+    'qtp-travel-mode'
+  )
+
+  appStore.on('qtp-travel-mode', (evt) => {
+    appStore.update({ travelMode: evt.target.value, })
+  })
 
   appStore.on('qtp-back-button', () => {
     appStore.update({ showForm: true, showListView: false, showOptions: false, showBack: false, })

@@ -12,6 +12,10 @@
   box-shadow: -4px 4px 8px rgba(0, 0, 0, 0.5)
 }
 
+.qtp-options--hidden {
+  display: none;
+}
+
 .qtp-options__select {
   background: none;
   border: none;

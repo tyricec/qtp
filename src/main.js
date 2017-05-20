@@ -40,6 +40,27 @@ loadGoogleMap().then(gmap => {
     renderer.render()
   })
 
+  appStore.on('showForm-update', (showForm) => {
+    if (showForm)
+      document.getElementById('qtp-form').classList.remove('qtp-form--hidden')
+    else
+      document.getElementById('qtp-form').classList.add('qtp-form--hidden')
+  })
+
+  appStore.on('showListView-update', (showListView) => {
+    if (showListView)
+      document.querySelector('.qtp-results').classList.remove('qtp-results--hidden')
+    else
+      document.querySelector('.qtp-results').classList.add('qtp-results--hidden')
+  })
+
+  appStore.on('showOptions-update', (showOptions) => {
+    if (showOptions)
+      document.querySelector('.qtp-options').classList.remove('qtp-options--hidden')
+    else
+      document.querySelector('.qtp-options').classList.add('qtp-options--hidden')
+  })
+
   appStore.publishFromEvent(
     document.getElementById('qtp-form'),
     'submit',
@@ -67,10 +88,7 @@ loadGoogleMap().then(gmap => {
   appStore.on('qtp-form-submit', (event) => {
     event.preventDefault()
 
-    document.querySelector('.qtp-results').classList.remove('qtp-results--hidden')
-    document.querySelector('.qtp-results').classList.add('qtp-results--loading')
-
-    event.target.classList.add('qtp-form--hidden')
+    appStore.update({ showForm: false, })
 
     directionsFetcher.get(
       (new gmap.DirectionsService()).route,
@@ -81,6 +99,7 @@ loadGoogleMap().then(gmap => {
       }
     ).then(res => googleDirectionsReducer(res.status, res.result))
     .then(directions => appStore.update({ directions, }))
-    .then(() => document.querySelector('.qtp-results').classList.remove('qtp-results--loading'))
+    .then(() => appStore.update({ showListView: true, }))
+    .then(() => appStore.update({ showOptions: true, }))
   })
 })

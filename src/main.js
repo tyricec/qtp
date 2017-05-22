@@ -7,13 +7,20 @@ import DirectionsRenderer from './renderers/DirectionsRenderer'
 import directionsFetcher from './utils/directionsFetcher'
 import googleDirectionsReducer from './utils/googleDirectionsReducer'
 
-loadGoogleMap().then(gmap => {
-  window.history.pushState(appStore, '')
-
-  window.addEventListener('popstate', (evt) => {
+window.addEventListener('popstate', (evt) => {
+  if (evt.state) {
     appStore.update(evt.state)
-  })
+  } else {
+    appStore.update({
+      showForm: true,
+      showListView: false,
+      showOptions: false,
+      directions: [],
+    })
+  }
+})
 
+loadGoogleMap().then(gmap => {
   const query = (input) => {
     const service = new gmap.places.AutocompleteService()
 
@@ -39,14 +46,15 @@ loadGoogleMap().then(gmap => {
   )
 
   appStore.on('directions-update', (directions) => {
-    const renderer = new DirectionsRenderer(
-      document.querySelector('.qtp-results'),
-      directions
-    )
-    renderer.render()
+    if (directions.length > 0) {
 
-    window.history.pushState(appStore,
-    '')
+      const renderer = new DirectionsRenderer(
+        document.querySelector('.qtp-results'),
+        directions
+      )
+      renderer.render()
+
+    }
   })
 
   appStore.on('showForm-update', (showForm) => {
@@ -70,22 +78,19 @@ loadGoogleMap().then(gmap => {
       document.querySelector('.qtp-options').classList.add('qtp-options--hidden')
   })
 
-  appStore.on('showBack-update', (showBack) => {
-    if (showBack)
-      document.querySelector('.qtp-back-button').classList.remove('qtp-back-button--hidden')
-    else
-      document.querySelector('.qtp-back-button').classList.add('qtp-back-button--hidden')
-  })
-
   appStore.on('travelMode-update', () => {
+    const appData = appStore.get()
+
     appStore.update({ showListView: false, })
+
+    document.querySelector('.qtp-options__select').value = appData.travelMode
 
     directionsFetcher.get(
       (new gmap.DirectionsService()).route,
       {
-        destination: appStore.destination,
-        origin: appStore.origin,
-        travelMode: appStore.travelMode,
+        destination: appData.destination,
+        origin: appData.origin,
+        travelMode: appData.travelMode,
       }
     ).then(res => googleDirectionsReducer(res.status, res.result))
       .then(directions => appStore.update({ directions, showListView: true, }))
@@ -96,16 +101,19 @@ loadGoogleMap().then(gmap => {
 
     appStore.update({ showForm: false, })
 
+    const appData = appStore.get()
+
     directionsFetcher.get(
       (new gmap.DirectionsService()).route,
       {
-        destination: appStore.destination,
-        origin: appStore.origin,
-        travelMode: appStore.travelMode,
+        destination: appData.destination,
+        origin: appData.origin,
+        travelMode: appData.travelMode,
       }
     ).then(res => googleDirectionsReducer(res.status, res.result))
       .then(directions => appStore.update({ directions, }))
       .then(() => appStore.update({ showListView: true, showBack: true, showOptions: true, }))
+      .then(() => { history.pushState(appStore.get(), 'Directions') })
   })
 
   document.getElementById('qtp-start-point').addEventListener('change', (evt) => {
@@ -116,6 +124,7 @@ loadGoogleMap().then(gmap => {
 
   document.querySelector('.qtp-options__select').addEventListener('change', (evt) => {
     appStore.update({ travelMode: evt.target.value, })
-  })
 
+    history.pushState(appStore.get(), '')
+  })
 })

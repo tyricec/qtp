@@ -16,10 +16,15 @@ const appData = {
 }
 
 const store = {
+  get: get,
   on: on,
   publish: publish,
   publishFromEvent: publishFromEvent,
   update: update,
+}
+
+function get() {
+  return appData
 }
 
 function on (event, cb) {

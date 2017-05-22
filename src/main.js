@@ -8,6 +8,12 @@ import directionsFetcher from './utils/directionsFetcher'
 import googleDirectionsReducer from './utils/googleDirectionsReducer'
 
 loadGoogleMap().then(gmap => {
+  window.history.pushState(appStore, '')
+
+  window.addEventListener('popstate', (evt) => {
+    appStore.update(evt.state)
+  })
+
   const query = (input) => {
     const service = new gmap.places.AutocompleteService()
 
@@ -38,6 +44,9 @@ loadGoogleMap().then(gmap => {
       directions
     )
     renderer.render()
+
+    window.history.pushState(appStore,
+    '')
   })
 
   appStore.on('showForm-update', (showForm) => {
@@ -79,54 +88,10 @@ loadGoogleMap().then(gmap => {
         travelMode: appStore.travelMode,
       }
     ).then(res => googleDirectionsReducer(res.status, res.result))
-    .then(directions => appStore.update({ directions, showListView: true, }))
+      .then(directions => appStore.update({ directions, showListView: true, }))
   })
 
-  appStore.publishFromEvent(
-    document.getElementById('qtp-form'),
-    'submit',
-    'qtp-form-submit'
-  ) 
-
-  appStore.publishFromEvent(
-    document.getElementById('qtp-start-point'),
-    'change',
-    'qtp-start-point-change'
-  )
-
-  appStore.publishFromEvent(
-    document.querySelector('.qtp-back-button'),
-    'click',
-    'qtp-back-button'
-  )
-
-  appStore.publishFromEvent(
-    document.getElementById('qtp-destination-point'),
-    'change',
-    'qtp-destination-point-change'
-  )
-
-  appStore.publishFromEvent(
-    document.querySelector('.qtp-options__select'),
-    'change',
-    'qtp-travel-mode'
-  )
-
-  appStore.on('qtp-travel-mode', (evt) => {
-    appStore.update({ travelMode: evt.target.value, })
-  })
-
-  appStore.on('qtp-back-button', () => {
-    appStore.update({ showForm: true, showListView: false, showOptions: false, showBack: false, })
-  })
-
-  appStore.on('qtp-start-point-change', (evt) => { 
-    appStore.update({ origin: evt.target.value, })
-  })
-
-  appStore.on('qtp-destination-point-change', (evt) => appStore.update({ destination: evt.target.value, }))
-
-  appStore.on('qtp-form-submit', (event) => {
+  document.getElementById('qtp-form').addEventListener('submit', (event) => {
     event.preventDefault()
 
     appStore.update({ showForm: false, })
@@ -139,7 +104,18 @@ loadGoogleMap().then(gmap => {
         travelMode: appStore.travelMode,
       }
     ).then(res => googleDirectionsReducer(res.status, res.result))
-    .then(directions => appStore.update({ directions, }))
-    .then(() => appStore.update({ showListView: true, showBack: true, showOptions: true, }))
+      .then(directions => appStore.update({ directions, }))
+      .then(() => appStore.update({ showListView: true, showBack: true, showOptions: true, }))
   })
+
+  document.getElementById('qtp-start-point').addEventListener('change', (evt) => {
+    appStore.update({ origin: evt.target.value, })
+  })
+
+  document.getElementById('qtp-destination-point').addEventListener('change', (evt) => appStore.update({ destination: evt.target.value, }))
+
+  document.querySelector('.qtp-options__select').addEventListener('change', (evt) => {
+    appStore.update({ travelMode: evt.target.value, })
+  })
+
 })

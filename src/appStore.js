@@ -1,14 +1,11 @@
 const subscribers = {}
 
-const store = {
+const appData = {
   destination: '',
   error: 'There was a problem loading this action. Refresh and try again',
   directions: [],
   isLoading: false,
-  on: on,
   origin: '',
-  publish: publish,
-  publishFromEvent: publishFromEvent,
   showBack: false,
   showError: false,
   showForm: true,
@@ -16,6 +13,12 @@ const store = {
   showMapView: false,
   showOptions: false,
   travelMode: 'DRIVING',
+}
+
+const store = {
+  on: on,
+  publish: publish,
+  publishFromEvent: publishFromEvent,
   update: update,
 }
 
@@ -59,8 +62,8 @@ function publishFromEvent (target, domEvent, eventName) {
 
 function update (data) {
   Object.keys(data).forEach((id) => {
-    store[id] = data[id]
-    publish(`${id}-update`, store[id])
+    appData[id] = data[id]
+    publish(`${id}-update`, appData[id])
   })
   return store
 }

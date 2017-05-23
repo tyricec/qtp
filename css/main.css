@@ -72,13 +72,12 @@
 
 .qtp-footer {
   padding: 8px 0;
-  background-color: #008F9A;
   width: 100%;
-  color: #ffffff;
-  box-shadow: -2px -2px 8px rgba(0, 0, 0, 0.5);
+  color: #008F9A;
 }
 
 .qtp-footer__info {
+  text-align: center;
   margin: 0 8px;
 }
 

@@ -14,7 +14,8 @@ window.addEventListener('popstate', (evt) => {
     appStore.update({
       showForm: true,
       showListView: false,
-      showOptions: false,
+      showOptions: true,
+      showBack: false,
       directions: [],
     })
   }
@@ -78,22 +79,36 @@ loadGoogleMap().then(gmap => {
       document.querySelector('.qtp-options').classList.add('qtp-options--hidden')
   })
 
+  appStore.on('showBack-update', (showBack) => {
+    const backButton = document.querySelector('.qtp-back-button')
+    if (showBack) {
+      backButton.removeAttribute('disabled')
+      backButton.classList.remove('qtp-back-button--disabled')
+    } else {
+      backButton.setAttribute('disabled', true)
+      backButton.classList.add('qtp-back-button--disabled')
+    }
+  })
+
   appStore.on('travelMode-update', () => {
     const appData = appStore.get()
 
-    appStore.update({ showListView: false, })
 
     document.querySelector('.qtp-options__select').value = appData.travelMode
 
-    directionsFetcher.get(
-      (new gmap.DirectionsService()).route,
-      {
-        destination: appData.destination,
-        origin: appData.origin,
-        travelMode: appData.travelMode,
-      }
-    ).then(res => googleDirectionsReducer(res.status, res.result))
-      .then(directions => appStore.update({ directions, showListView: true, }))
+    if (appData.showListView) {
+      appStore.update({ showListView: false, })
+
+      directionsFetcher.get(
+        (new gmap.DirectionsService()).route,
+        {
+          destination: appData.destination,
+          origin: appData.origin,
+          travelMode: appData.travelMode,
+        }
+      ).then(res => googleDirectionsReducer(res.status, res.result))
+        .then(directions => appStore.update({ directions, showListView: true, }))
+    }
   })
 
   document.getElementById('qtp-form').addEventListener('submit', (event) => {
@@ -126,5 +141,9 @@ loadGoogleMap().then(gmap => {
     appStore.update({ travelMode: evt.target.value, })
 
     history.pushState(appStore.get(), '')
+  })
+
+  document.querySelector('.qtp-back-button').addEventListener('click', () => {
+    history.back()
   })
 })

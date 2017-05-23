@@ -6,12 +6,12 @@ const appData = {
   directions: [],
   isLoading: false,
   origin: '',
-  showBack: false,
+  showBack: true,
   showError: false,
   showForm: true,
   showListView: false,
   showMapView: false,
-  showOptions: false,
+  showOptions: true,
   travelMode: 'DRIVING',
 }
 

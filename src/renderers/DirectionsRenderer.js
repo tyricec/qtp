@@ -46,6 +46,7 @@ function update(directions) {
     listItemSeparator.setAttribute('class', 'qtp-results__list-hr')
 
     instructionContainer.appendChild(instruction.content)
+    instructionContainer.classList.add('qtp-results__instruction')
     
     listItem.appendChild(instructionContainer)
     listItem.appendChild(listItemSeparator)

@@ -16,6 +16,9 @@
 }
 
 .qtp-back-button {
+  background: none;
+  border: none;
+  outline: none;
   margin: 0 8px 0 0;
   color: #ffffff;
   position: relative;
@@ -24,6 +27,12 @@
 
 .qtp-back-button--disabled {
   color: rgba(255,255,255,0.33);
+}
+
+.qtp-back-button:disabled {
+  background: none;
+  border: none;
+  outline: none;
 }
 
 .qtp-options {
@@ -82,15 +91,15 @@
 }
 
 .qtp-footer__link {
-  color: #cacaff;
+  color: #fa9090;
 }
 
 .qtp-footer__link:visited {
-  color: #dca9fc;
+  color: #ac79bc;
 }
 
 .qtp-footer__link:active {
-  color: #fa9090;
+  color: #ba7081;
 }
 
 .qtp-footer__link:hover {

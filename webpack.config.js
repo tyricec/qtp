@@ -2,7 +2,7 @@ const path = require('path')
 
 const config = {
   devServer: {
-    publicPath: '/dist/',
+    publicPath: '/qtp/dist/',
     host: '0.0.0.0',
     disableHostCheck: true,
   },

@@ -140,10 +140,9 @@ loadGoogleMap().then(gmap => {
   document.querySelector('.qtp-options__select').addEventListener('change', (evt) => {
     appStore.update({ travelMode: evt.target.value, })
 
-    history.pushState(appStore.get(), '')
   })
 
   document.querySelector('.qtp-back-button').addEventListener('click', () => {
-    history.back()
+    appStore.update({ showForm: true, showBack: false, showListView: false, })
   })
 })

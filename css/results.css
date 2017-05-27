@@ -41,3 +41,13 @@
   text-decoration: none;
   font-size: 32px;
 }
+
+@media (min-width: 481px) {
+  .qtp-results__instruction {
+    width: 85%;
+  }
+
+  .qtp-results__icon {
+    width: 5%;
+  }
+}

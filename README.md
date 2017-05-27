@@ -9,3 +9,8 @@ To run application, use the command:
 ```
 npm run serve
 ```
+
+## Known Issues ##
+
+- Back button does not have focus ring when tabbing through application
+- Pressing Enter does not display directions
